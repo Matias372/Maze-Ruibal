@@ -1,0 +1,77 @@
+HTML principales:
+
+Index: Presentación del juego, botones para empezar a jugar, acceso a instrucciones, contacto, y otras secciones importantes.
+
+Game: Interfaz del juego de laberinto, donde los jugadores pueden interactuar con el juego y navegar a través del laberinto.
+
+Contact Us: Formulario de contacto usando email.js para que los jugadores puedan enviarte sus comentarios o preguntas.
+
+FAQ: Respuestas a preguntas frecuentes sobre el juego, solución de problemas comunes, y otras informaciones útiles.
+
+Ranking: Mostrar la puntuación de los jugadores, tiempos, y hasta dónde han llegado en el laberinto. Puedes considerar la opción de guardar estos datos en el backend si decides añadir uno.
+
+Profile: Página para que los jugadores gestionen su perfil, en caso de añadir funcionalidades de autenticación y edición de perfiles en el futuro.
+
+
+
+Pasos para Crear una Página con Backend Usando Vercel y MongoDB:
+Configurar MongoDB Atlas:
+
+Crear una Cuenta: Regístrate en MongoDB Atlas.
+Crear un Cluster Gratuito: Elige la opción de crear un cluster gratuito (M0 Sandbox). Esto te permitirá tener una base de datos MongoDB alojada en la nube sin costo.
+Configurar Acceso: Añade un usuario de base de datos y configura las IPs desde las que permitirás el acceso (puedes permitir acceso desde cualquier IP).
+Obtener la Cadena de Conexión: Una vez creado el cluster, obtén la cadena de conexión. Esta cadena se utilizará para conectarte a tu base de datos desde el backend.
+Configurar Vercel:
+
+Crear una Cuenta: Regístrate en Vercel.
+Conectar tu Repositorio: Conecta tu repositorio de GitHub, GitLab o Bitbucket a Vercel para un despliegue continuo (CI/CD).
+Crear Funciones Serverless: Vercel permite crear API routes utilizando serverless functions. Estas funciones actuarán como tu backend.
+Crea un archivo dentro de tu proyecto, por ejemplo, api/data.js, donde colocarás la lógica del backend para interactuar con MongoDB.
+Integrar MongoDB con Vercel:
+
+Instalar Dependencias: En tu proyecto, instala el paquete mongodb para interactuar con tu base de datos:
+bash
+Copiar código-------------
+
+npm install mongodb
+-------------------------
+Conectar con MongoDB en una Serverless Function: Ejemplo de cómo podrías hacerlo en un archivo api/data.js:
+javascript
+Copiar código----------------
+
+import { MongoClient } from 'mongodb';
+
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+export default async function handler(req, res) {
+  try {
+    await client.connect();
+    const database = client.db('myDatabase');
+    const collection = database.collection('myCollection');
+    const data = await collection.find({}).toArray();
+    res.status(200).json(data);
+  } catch (e) {
+    res.status(500).json({ message: 'Error connecting to database', error: e });
+  } finally {
+    await client.close();
+  }
+}
+-------------------------------------------------
+Variable de Entorno: Configura MONGODB_URI en el panel de Vercel en la sección de Environment Variables para almacenar tu cadena de conexión de MongoDB.
+
+Despliegue y Pruebas:
+
+Deploy: Una vez que tengas todo configurado, Vercel desplegará tu proyecto automáticamente cada vez que hagas un commit en tu repositorio.
+Probar la API: Puedes acceder a las rutas de tu API, por ejemplo, /api/data, para asegurarte de que el backend está funcionando correctamente y que puedes interactuar con MongoDB.
+Limitaciones del Plan Gratuito:
+
+MongoDB Atlas:
+
+El cluster gratuito tiene límites en cuanto a almacenamiento (512 MB), rendimiento, y características avanzadas.
+Aún así, es suficiente para proyectos pequeños y pruebas.
+
+Vercel:
+
+Las funciones serverless en Vercel también tienen limitaciones en cuanto a tiempo de ejecución (10 segundos), cantidad de requests y capacidad de almacenamiento (100 GB de ancho de banda por mes en el plan gratuito).
+Es adecuado para proyectos de baja a media complejidad.

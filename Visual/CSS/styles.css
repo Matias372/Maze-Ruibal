@@ -1,0 +1,107 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+#game-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#health-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px; /* Reducido el tamaño de la barra de vida para dispositivos móviles */
+  background-color: #0f0; /* verde */
+}
+
+#event-description {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* padding: 10px; */
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#options-container {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+#options-container .options-Usar {
+  width: 100px;
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#options-container .options-Izquierda {
+  position: absolute;
+  width: 100px;
+  left: 5%;
+  bottom: 0px;
+}
+
+#options-container .options-Frente {
+  position: absolute;
+  width: 100px;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#options-container .options-Derecha {
+  position: absolute;
+  width: 100px;
+  right: 5%;
+  bottom: 0px;
+}
+
+#options-container .options-Explorar {
+  position: absolute;
+  width: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#options-container .options-Volver {
+  position: absolute;
+  width: 100px;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#options-container .options-Continuar {
+  position: absolute;
+  width: 100px;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* Personaliza los estilos según tus preferencias */
