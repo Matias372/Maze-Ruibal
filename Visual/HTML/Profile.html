@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Profile</title>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <!-- CSS -->
+        <link rel="stylesheet" href="../CSS/General_Style.css" />
+        <!-- Script -->
+        <script src="../../Control/checkSession.js"></script>
+    </head>
+    <body>
+        <div id="Header">
+            <!-- Header content -->
+        </div>
+
+        <main class="profile container">
+            <img src="" alt="User profile picture" class="profile__image" />
+            <p id="username" class="h4">Username</p>
+            <button id="change-image" class="btn btn-primary profile__button">
+                Change Image
+            </button>
+
+            <div class="profile__info">
+                <h4>Mail:</h4>
+                <p id="mail">user@example.com</p>
+                <button
+                    id="change-mail"
+                    class="btn btn-secondary profile__button"
+                >
+                    Change Mail
+                </button>
+            </div>
+
+            <div class="profile__info">
+                <h4>Best Score:</h4>
+                <p id="best-score">Floor: 0, Time: 00:00:00</p>
+            </div>
+
+            <button class="btn btn-danger profile__button">
+                Delete Account
+            </button>
+        </main>
+
+        <div id="Footer">
+            <!-- Footer content -->
+        </div>
+
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Script para incluir Header y Footer -->
+        <script src="../../Control/IncludeHeaderFooter.js"></script>
+        <script src="../../Control/SetProfile.js"></script>
+    </body>
+</html>

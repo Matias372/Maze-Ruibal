@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgb(43, 43, 43);
+  color: white;
+}
+.header__logo-toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+.header__logo-toggle .header__brand {
+  text-decoration: none;
+  color: inherit;
+}
+.header__logo-toggle .header__toggle-menu-btn {
+  color: white;
+  display: block;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.header__logo-toggle .header__profile-img {
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 1rem;
+  left: calc(100% - 3rem);
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+.header__nav {
+  position: fixed;
+  top: 0;
+  right: -75%;
+  width: 70%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+.header__nav.active {
+  right: 0;
+}
+.header__nav .header__close-menu-btn {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.header__nav .header__nav-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  padding-top: 4rem;
+}
+.header__nav .nav-link {
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}
+.header__nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.header__session-links {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.header__session-links .header__profile {
+  flex-direction: column;
+}
+.header__session-links .header__profile img {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+.header__session-links .nav-link {
+  padding: 1rem;
+  color: white;
+}
+@media (min-width: 768px) {
+  .header__nav {
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    color: inherit;
+    transition: none;
+    right: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+  }
+  .header .header__toggle-menu-btn,
+  .header .header__close-menu-btn {
+    display: none;
+  }
+  .header .header__nav-content {
+    flex-direction: row;
+    padding-top: 0;
+  }
+  .header .header__profile-img {
+    position: static;
+    margin-left: 1rem;
+  }
+}
+
+.home__main {
+  width: 100vw !important;
+}
+.home__main div div img {
+  width: 100vw !important;
+  min-height: 252px;
+}
+.home__main div #Home-description {
+  background-color: wheat;
+  padding: 1rem;
+  width: 100vw !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home__main div #Home-description p {
+  font-family: "Special Elite", cursive;
+  color: black;
+  font-size: large;
+  font-weight: normal;
+}
+.home__main div #Home-description a {
+  background-color: darkgreen;
+  border: 2px solid black;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.signup-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+.login-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+/*# sourceMappingURL=General_Style.css.map */

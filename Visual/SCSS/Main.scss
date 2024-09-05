@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+$pixelfont: "Press Start 2P", cursive;
+$homefont: "Special Elite", cursive;
+
+//FONTS
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+//SCSS
+@import "Templates/_HeaderStyle.scss";
+@import "Templates/_HomeStyle.scss";
+@import "Templates/_SignUpStyle.scss";
+@import "Templates/_LogInStyle.scss";

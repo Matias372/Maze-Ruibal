@@ -1,0 +1,35 @@
+.home__main {
+    width: 100vw !important;
+    div {
+        div {
+            img {
+                width: 100vw !important;
+                min-height: 252px;
+            }
+        }
+
+        #Home-description {
+            background-color: wheat;
+            padding: 1rem;
+            width: 100vw !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            p {
+                font-family: $homefont;
+                color: black;
+                font-size: large;
+                font-weight: normal;
+            }
+            a {
+                background-color: darkgreen;
+                border: 2px solid black;
+                color: white;
+                text-decoration: none;
+                padding: 0.5rem;
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+        }
+    }
+}

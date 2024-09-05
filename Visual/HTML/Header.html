@@ -1,0 +1,53 @@
+<header class="header d-flex justify-content-between align-items-center p-3">
+    <section class="header__logo-toggle">
+        <a href="Home.html" class="header__brand">
+            <p class="header__brand-name mb-0">
+                The Forgotten <br />
+                Maze
+            </p>
+        </a>
+
+        <!-- Botón de menú -->
+        <button
+            id="menuButton"
+            class="header__toggle-menu-btn"
+            onclick="toggleMenu()"
+        >
+            ☰
+        </button>
+    </section>
+
+    <!-- Menú desplegable -->
+    <section id="menu" class="header__nav">
+        <!-- Botón para cerrar menú -->
+        <button
+            id="closeMenuButton"
+            class="header__close-menu-btn"
+            onclick="toggleMenu()"
+        >
+            X
+        </button>
+        <nav class="header__nav-content d-flex flex-column align-items-start">
+            <a href="Home.html" class="header__link nav-link">Home</a>
+            <a href="Game.html" class="header__link nav-link">Play</a>
+            <a href="ContactUs.html" class="header__link nav-link">Contact</a>
+            <a href="Ranking.html" class="header__link nav-link">Ranking</a>
+            <div
+                id="header__session-links"
+                class="header__session-links d-flex flex-column align-items-center"
+            >
+                <!-- Links de sesión para cuando el usuario no está autenticado -->
+                <a href="LogIn.html" class="header__link nav-link">Log in</a>
+                <a href="SignUp.html" class="header__link nav-link">Sign up</a>
+                <!-- Contenedor para cuando el usuario está autenticado -->
+                <!-- 
+                <div class="header__profile d-flex align-items-center">
+                    <img src="URL_DE_LA_IMAGEN_DE_PERFIL" alt="Profile Image" class="header__profile-img rounded-circle me-2" width="30" height="30"/>
+                    <a href="./Visual/HTML/Profile.html" class="header__link nav-link">Profile</a>
+                    <a href="./Visual/HTML/LogOut.html" class="header__link nav-link">Log Out</a>
+                </div>
+                -->
+            </div>
+        </nav>
+    </section>
+</header>
