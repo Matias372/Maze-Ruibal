@@ -75,3 +75,95 @@ Vercel:
 
 Las funciones serverless en Vercel también tienen limitaciones en cuanto a tiempo de ejecución (10 segundos), cantidad de requests y capacidad de almacenamiento (100 GB de ancho de banda por mes en el plan gratuito).
 Es adecuado para proyectos de baja a media complejidad.
+
+
+-------------------------------------------------------------------------------------------------------
+
+Estoy Trabajando en un proyecto web.
+la pagina tiene:
+Home: que seria la pagina principal, con una imagen principal, un texto explicando el juego o presentándolo, el botón de jugar.
+ContactUs: seria una pagina donde el usuario puede enviar un mail al desarollador.
+LogIn y SignUp: son las 2 paginas para que el usuario se registre e inicie sesión.
+Ranking: es una pagina donde muestra una tabla de los mejores 10 jugadores.
+Profile: seria el perfil de usuario, puede cambiar su imagen de perfil, mail o borrar cuenta en caso que quiera.
+Game.html: aquí se ejecuta el juego.
+
+el juego se trata de lo siguiente, es por toma de opciones y ver resultado. el usuario aparece en el menú principal, al presionar comenzar se ejecuta el código del juego, cambia el backgroud-image del div correspondiente, y muestra un escenario, abajo del escenario estarían los botones que serian las opciones que hay en ese escenario que puede tomar el jugador, abajo de los botones hay un cuadro donde se muestra un texto explicando el escenario y opciones.
+los escenarios actuales son:
+se dividen en 3 tipos positivo, neutro, negativo; te lo paso como Tipo - Escenario - Opciones
+. neutro - Bifurcación de 3 - izquierda, frente, derecha
+. neutro - Bifurcación de RL - izquierda, derecha
+. neutro - Bifurcación de RF - frente, derecha
+. neutro - Bifurcación de LF - izquierda, frente
+. neutro - Corridor Deadend - Volver
+. positivo - stairs - Subir
+. positivo - Fountain - Beber, Seguir
+. positivo/negativo - Cofre - Abrir, Seguir (puede salir un objeto o una trampa)
+. negativo - Trap - Continuar (hace daño si no tiene botas)
+. negativo - Monster - Continuar (hace daño si no tiene escudo)
+. negativo - TrapHole - Continuar (cae un piso)
+. Dead - DeadScene - Retry
+
+al elegir una de las opciones para proceder con otro escenario se cambia el escenario casi aleatoriamente, se pondrá algunas condiciones para no repetir ciertos escenarios despues del mismo (escaleras, trampa, monster).
+el cofre puede dar botas, escudo, antorcha, Trampa. la trampa haría daño al jugador, los objetos son consumibles, la bota y escudo se consumen solos al caer en un escenario negativo relacionado, evitando el daño.
+la antorcha es un consumible, dura 10 escenarios aproximadamente por ahora. se puede conseguir en el escenario de cofre y en ocaciones en el escenario de fuente. al no tener antorcha se coloca el filtro oscuro al juego (div donde se cambia el background-image, tiene unas imagens con opacidad baja para imitar oscuridad o luz), al no estar con antorcha la calma del personaje baja y cuando llega a 0 hay alta probabilidad de que salga un evento negativo extra: el personaje se retira al ultimo piso donde se encontró una fuente. al encender una antorcha se empieza a recuperar la calma en cada cambio de escenario.
+la Fuente es un escenario donde da la opción de beber, al beber, recupera vida.
+el juego se comienza en el piso 0 el objetivo es salir, por ahora seria el piso 10. debe encontrar la escalera para subir de piso. 
+al morir o terminar el juego muestra una div donde están los resultados, el piso alcanzado y cuanto tiempo tomo. (al comenzar el juego comienza un cronometro)
+
+=======================================================================
+Paletas de Colores
+1. Paleta de Colores Adquirida de la Imagen:
+#2E302F - Gris oscuro (paredes y suelos de los escenarios).
+#3D3D3D - Gris medio (sombreado y detalles de textura).
+#767676 - Gris claro (luces y detalles resaltados).
+#42403F - Marrón oscuro (detalles de las paredes y objetos como el cofre).
+#AD9F89 - Marrón claro (detalles en el cofre y la fuente).
+#70CFE2 - Azul claro (agua de la fuente).
+#FF5A3B - Rojo brillante (velas en el escenario de trampa).
+2. Paleta de Colores Recomendados para la Web:
+#2E302F - Gris oscuro: para fondos principales y mantener la atmósfera de misterio.
+#FEFEFE - Blanco: para textos principales y elementos destacados.
+#4A6D7C - Azul oscuro apagado: para botones, enlaces y elementos interactivos.
+#7C4A52 - Rojo oscuro/marrón: para alertas, mensajes de error o elementos que requieran atención.
+#B7A57A - Oro envejecido: para detalles importantes, elementos especiales y resaltar información.
+#596161 - Gris medio: para fondos de secciones, bordes y separadores.
+Aplicación de la Paleta de Colores en las Páginas
+Home:
+
+Fondo: #2E302F (Gris oscuro) para el fondo principal de la página.
+Texto principal: #FEFEFE (Blanco) para el título del juego y cualquier otro texto destacado.
+Botón "Jugar": #4A6D7C (Azul oscuro apagado) con texto en #FEFEFE (Blanco).
+Detalles especiales o elementos decorativos: #B7A57A (Oro envejecido).
+ContactUs:
+
+Fondo: #2E302F (Gris oscuro) o #596161 (Gris medio).
+Formulario de contacto: Bordes en #4A6D7C (Azul oscuro apagado), botones de envío con #7C4A52 (Rojo oscuro/marrón).
+Texto: #FEFEFE (Blanco) para los campos de formulario y etiquetas.
+LogIn y SignUp:
+
+Fondo: #2E302F (Gris oscuro).
+Campos de entrada: Bordes o fondos en #596161 (Gris medio).
+Botones de acción: #4A6D7C (Azul oscuro apagado) para acciones positivas, #7C4A52 (Rojo oscuro/marrón) para acciones negativas.
+Mensajes de error: #7C4A52 (Rojo oscuro/marrón).
+Ranking:
+
+Fondo: #2E302F (Gris oscuro) o #596161 (Gris medio).
+Tabla de jugadores: Bordes en #4A6D7C (Azul oscuro apagado), texto en #FEFEFE (Blanco).
+Destacar al jugador actual: #B7A57A (Oro envejecido).
+Profile:
+
+Fondo: #2E302F (Gris oscuro).
+Botones de acción: #4A6D7C (Azul oscuro apagado) para "Guardar cambios", #7C4A52 (Rojo oscuro/marrón) para "Eliminar cuenta".
+Campos de edición: #596161 (Gris medio).
+Game.html:
+
+Fondo del juego: #2E302F (Gris oscuro) para mantener la coherencia con los escenarios.
+Texto: #FEFEFE (Blanco) para mantener buena legibilidad.
+Botones de opciones: #4A6D7C (Azul oscuro apagado).
+Efectos y alertas: #7C4A52 (Rojo oscuro/marrón).
+Header y Footer:
+
+Fondo: #2E302F (Gris oscuro) para mantener uniformidad en todas las páginas.
+Texto y enlaces: #FEFEFE (Blanco) para asegurar la legibilidad.
+Botones o íconos: #4A6D7C (Azul oscuro apagado) o #B7A57A (Oro envejecido) para elementos interactivos.

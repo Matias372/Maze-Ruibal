@@ -1,0 +1,97 @@
+// Estilos principales
+.ranking {
+    // Fondo del main
+    background-color: #f0f0f0; // Gris claro para el fondo
+
+    // Título
+    &__title {
+        font-family: $pixelfont;
+        font-size: 2rem;
+        color: #00ff00; // Verde retro
+        text-shadow: 2px 2px 0 #333; // Sombra para efecto 3D
+        padding-top: 1.5rem;
+        padding-bottom: 1rem;
+        text-align: center;
+    }
+
+    // Tabla
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto;
+        background-color: #000; // Fondo negro para el estilo retro
+        color: #fff; // Texto blanco para contraste
+        font-family: $homefont;
+    }
+
+    // Cabecera de la tabla
+    &__thead {
+        background-color: #222; // Fondo oscuro para la cabecera
+    }
+
+    &__th {
+        padding: 0.1rem; // Ajuste de padding
+        border: 2px solid #00ff00; // Borde verde para estilo retro
+        text-align: center;
+        font-size: 0.55rem; // Tamaño reducido para mejor ajuste en pantallas pequeñas
+        font-family: $pixelfont;
+        color: #00ff00;
+    }
+
+    // Cuerpo de la tabla
+    &__tbody {
+        background-color: #000; // Fondo negro para el cuerpo de la tabla
+    }
+
+    &__row {
+        border-bottom: 1px solid #333; // Línea inferior de cada fila
+    }
+
+    &__cell {
+        padding: 0.1rem;
+        text-align: center;
+        font-size: 0.55rem;
+        color: #fff;
+        font-size: large;
+        font-family: sans-serif !important;
+    }
+
+    // Estilo para filas vacías
+    &__empty-cell {
+        color: #888; // Texto gris para celdas vacías
+    }
+
+    // Responsividad para pantallas pequeñas
+    @media (max-width: 768px) {
+        &__title {
+            font-size: 1rem;
+        }
+
+        &__th,
+        &__cell {
+            padding: 0.7rem;
+            font-size: 0.6rem;
+        }
+        .ranking__cell {
+            font-size: small !important;
+            font-family: sans-serif !important;
+        }
+    }
+
+    // Responsividad para pantallas muy pequeñas
+    @media (max-width: 480px) {
+        &__title {
+            font-size: 1rem;
+        }
+
+        &__th,
+        &__cell {
+            padding: 0.5rem;
+            font-size: 0.55rem;
+        }
+        .ranking__cell {
+            font-size: small !important;
+            font-family: sans-serif !important;
+        }
+    }
+}

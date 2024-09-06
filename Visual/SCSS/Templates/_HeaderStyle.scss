@@ -5,6 +5,7 @@
     padding: 1rem;
     background-color: rgb(43, 43, 43);
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
 
     &__logo-toggle {
         display: flex;
@@ -99,6 +100,7 @@
         flex-direction: column;
 
         .header__profile {
+            display: flex;
             flex-direction: column;
             img {
                 width: 50px;

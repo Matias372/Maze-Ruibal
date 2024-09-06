@@ -12,12 +12,69 @@
         />
         <!-- CSS -->
         <link rel="stylesheet" href="../CSS/General_Style.css" />
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+        ></script>
     </head>
     <body>
         <div id="Header"></div>
 
-        <main>
-            <p>Creandose aun...</p>
+        <main class="main main--contact container my-5">
+            <h1 class="main__title text-center mb-4">Contact Us</h1>
+            <form class="contact-form" id="contact-form">
+                <div class="contact-form__group form-group">
+                    <label class="contact-form__label" for="email"
+                        >Email address</label
+                    >
+                    <input
+                        type="email"
+                        class="contact-form__input form-control"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    />
+                </div>
+                <div class="contact-form__group form-group">
+                    <label class="contact-form__label" for="reason"
+                        >Reason for Contact</label
+                    >
+                    <select
+                        class="contact-form__select form-control"
+                        id="reason"
+                        required
+                    >
+                        <option value="" disabled selected>
+                            Select a reason
+                        </option>
+                        <option value="support">Support</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="inquiry">Other</option>
+                    </select>
+                </div>
+                <div class="contact-form__group form-group">
+                    <label class="contact-form__label" for="message"
+                        >Message</label
+                    >
+                    <textarea
+                        class="contact-form__textarea form-control"
+                        id="message"
+                        rows="4"
+                        placeholder="Enter your message"
+                        required
+                    ></textarea>
+                </div>
+                <button
+                    type="submit"
+                    class="contact-form__button btn btn-primary"
+                >
+                    Send
+                </button>
+            </form>
+            <p
+                class="contact-form__response-message mt-3"
+                id="response-message"
+            ></p>
         </main>
 
         <div id="Footer"></div>
@@ -26,7 +83,8 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <!-- Script-->
+        <!-- Script -->
         <script src="../../Control/IncludeHeaderFooter.js"></script>
+        <script src="../../Control/contact-form.js"></script>
     </body>
 </html>

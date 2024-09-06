@@ -1,0 +1,86 @@
+main.user__profile {
+    background-color: gray;
+    min-height: 80vh;
+
+    .profile__INB {
+        padding-top: 20px;
+        margin-left: 1rem;
+
+        .profile__image {
+            background-color: white;
+            width: 100px;
+            height: 100px;
+        }
+
+        .profile__info {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column !important;
+            flex-wrap: nowrap !important;
+            margin-left: 1rem;
+
+            h3 {
+                color: white;
+                width: 200px; /* Ancho fijo */
+                font-size: 1.5rem; /* Ajusta el tamaño de la fuente en función del tamaño del viewport */
+                max-width: 100%;
+            }
+            #change-image {
+                background-color: aliceblue;
+                color: black;
+                border: 1px solid black;
+                padding: 2px;
+            }
+        }
+    }
+
+    .profile__mailinfo {
+        margin-top: 2rem;
+
+        h4 {
+            color: white;
+        }
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            p {
+                margin: 0;
+                padding: 0;
+                color: white;
+            }
+            #change-mail {
+                background-color: rgb(255, 255, 255);
+                color: black;
+                border: 1px solid black;
+                height: 30px;
+                padding: 0;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    }
+
+    .profile__gameinfo {
+        margin-top: 2rem;
+        h4 {
+            color: white;
+        }
+        p {
+            color: white;
+        }
+    }
+
+    .profile__delete {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .profile__button {
+            background-color: rgb(210, 25, 25);
+            color: white;
+            margin-top: 6rem;
+        }
+    }
+}

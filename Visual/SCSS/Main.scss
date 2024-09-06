@@ -3,14 +3,28 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+// Variables de fuentes
 $pixelfont: "Press Start 2P", cursive;
 $homefont: "Special Elite", cursive;
 
-//FONTS
+// Variables de colores
+$color-gris-oscuro: #2e302f; // Para fondos principales
+$color-blanco: #fefefe; // Para textos principales
+$color-azul-oscuro-apagado: #4a6d7c; // Para botones, enlaces y elementos interactivos
+$color-rojo-oscuro-marron: #7c4a52; // Para alertas, mensajes de error o elementos que requieran atención
+$color-oro-envejecido: #b7a57a; // Para detalles importantes, elementos especiales y resaltar información
+$color-gris-medio: #596161; // Para fondos de secciones, bordes y separadores
+
+// FONTS
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
-//SCSS
+
+// SCSS
 @import "Templates/_HeaderStyle.scss";
 @import "Templates/_HomeStyle.scss";
 @import "Templates/_SignUpStyle.scss";
 @import "Templates/_LogInStyle.scss";
+@import "Templates/_ProfileStyle.scss";
+@import "Templates/_FooterStyle.scss";
+@import "Templates/_RankingStyle.scss";

@@ -1,0 +1,99 @@
+.game-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+
+    &__scene {
+        position: relative;
+        width: 80%;
+        height: 60vh;
+        border: 2px solid #fff;
+        overflow: hidden;
+        margin-bottom: 20px;
+
+        &__background,
+        &__filter,
+        &__interface,
+        &__effects {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        &__background {
+            background-image: url("ruta/al/escenario.jpg"); /* Ruta de la imagen del escenario */
+            background-size: cover;
+            background-position: center;
+        }
+
+        &__filter {
+            background-color: rgba(
+                0,
+                0,
+                0,
+                0.5
+            ); /* Filtro oscuro por defecto */
+            transition: background-color 0.5s ease;
+        }
+
+        &__interface {
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .interface__player-stats {
+                display: flex;
+                flex-direction: column;
+
+                .player-stats__item {
+                    margin: 5px 0;
+                }
+            }
+        }
+
+        &__effects {
+            background-color: rgba(
+                0,
+                0,
+                0,
+                0
+            ); /* Efecto de transición (oscurecer o aclarar) */
+            transition: background-color 0.5s ease;
+        }
+    }
+
+    &__menu {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+
+        .menu__option {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #555;
+            }
+        }
+    }
+
+    &__text {
+        text-align: center;
+        font-size: 1.2em;
+        margin: 20px;
+
+        .text__description {
+            margin: 0;
+        }
+    }
+}

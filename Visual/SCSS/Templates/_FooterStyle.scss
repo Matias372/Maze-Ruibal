@@ -1,0 +1,108 @@
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 10px; // Espacio reducido para móviles
+    text-align: center;
+
+    &__container {
+        display: flex;
+        flex-direction: column; // Apilar las secciones para móviles
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+
+    &__section {
+        width: 100%; // Cada sección ocupa el ancho completo en móviles
+        margin-bottom: 20px; // Espacio entre secciones
+    }
+
+    &__title {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__list-item {
+        margin-bottom: 5px;
+    }
+
+    &__link {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__text {
+        margin: 10px 0;
+    }
+
+    &__donation-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    &__donation-button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    &__donation-logo {
+        width: 80px; // Tamaño más pequeño para móviles
+        height: auto;
+        display: block;
+    }
+}
+
+// Media queries para pantallas más grandes
+@media (min-width: 768px) {
+    .footer__container {
+        flex-direction: row; // Secciones en línea para tabletas
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    .footer__section {
+        width: auto; // Ajusta el ancho de las secciones para tabletas y más
+        margin-bottom: 0;
+    }
+
+    .footer__title {
+        font-size: 20px;
+    }
+
+    .footer__donation-logo {
+        width: 100px; // Tamaño del logo más grande para tabletas
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer {
+        padding: 20px 40px; // Mayor espacio en pantallas grandes
+    }
+
+    .footer__container {
+        max-width: 1200px;
+    }
+
+    .footer__section {
+        padding: 10px;
+    }
+
+    .footer__donation-logo {
+        width: 120px; // Tamaño del logo aún más grande para escritorio
+    }
+}

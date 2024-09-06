@@ -19,32 +19,44 @@
             <!-- Header content -->
         </div>
 
-        <main class="profile container">
-            <img src="" alt="User profile picture" class="profile__image" />
-            <p id="username" class="h4">Username</p>
-            <button id="change-image" class="btn btn-primary profile__button">
-                Change Image
-            </button>
+        <main class="user__profile container">
+            <!-- Profile content -->
+            <section class="profile__INB d-flex row">
+                <img src="" alt="User profile picture" class="profile__image" />
+                <div class="profile__info d-flex">
+                    <h3 id="username" class="User__name">Username</h3>
+                    <button
+                        id="change-image"
+                        class="profile__button btn btn-primary"
+                    >
+                        Change Image
+                    </button>
+                </div>
+            </section>
 
-            <div class="profile__info">
+            <div class="profile__mailinfo">
                 <h4>Mail:</h4>
-                <p id="mail">user@example.com</p>
-                <button
-                    id="change-mail"
-                    class="btn btn-secondary profile__button"
-                >
-                    Change Mail
-                </button>
+                <div>
+                    <p id="mail">user@example.com</p>
+                    <button
+                        id="change-mail"
+                        class="btn btn-secondary profile__button"
+                    >
+                        Change Mail
+                    </button>
+                </div>
             </div>
 
-            <div class="profile__info">
+            <div class="profile__gameinfo">
                 <h4>Best Score:</h4>
                 <p id="best-score">Floor: 0, Time: 00:00:00</p>
             </div>
 
-            <button class="btn btn-danger profile__button">
-                Delete Account
-            </button>
+            <div class="profile__delete">
+                <button class="btn btn-danger profile__button">
+                    Delete Account
+                </button>
+            </div>
         </main>
 
         <div id="Footer">

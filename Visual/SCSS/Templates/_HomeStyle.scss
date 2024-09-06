@@ -2,8 +2,10 @@
     width: 100vw !important;
     div {
         div {
+            margin: 0;
+            padding: 0;
             img {
-                width: 100vw !important;
+                width: 100% !important;
                 min-height: 252px;
             }
         }

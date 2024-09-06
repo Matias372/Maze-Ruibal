@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Game</title>
+        <link rel="stylesheet" href="../CSS/General_Style.css" />
+    </head>
+    <body>
+        <div id="Header"></div>
+
+        <main class="game-main">
+            <!-- Sección del Escenario -->
+            <section class="game-main__scene">
+                <div class="scene__background"></div>
+                <div class="scene__filter"></div>
+                <div class="scene__interface">
+                    <div class="interface__player-stats">
+                        <p class="player-stats__item">Piso:</p>
+                        <p class="player-stats__item">Botas:</p>
+                        <p class="player-stats__item">Escudo:</p>
+                        <p class="player-stats__item">Antorcha:</p>
+                    </div>
+                </div>
+                <div class="scene__effects"></div>
+            </section>
+
+            <!-- Sección del Menú -->
+            <section class="game-main__menu">
+                <button class="menu__option" id="option1"></button>
+                <button class="menu__option" id="option2"></button>
+                <button class="menu__option" id="option3"></button>
+            </section>
+
+            <!-- Sección de Texto -->
+            <section class="game-main__text">
+                <p class="text__description"></p>
+            </section>
+        </main>
+
+        <div id="Footer"></div>
+
+        <script src="../../Control/IncludeHeaderFooter.js"></script>
+    </body>
+</html>

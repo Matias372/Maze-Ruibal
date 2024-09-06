@@ -1,30 +1,75 @@
-<footer class="footer bg-dark text-white text-center py-3">
-    <div class="footer__content container">
-        <nav class="footer__nav d-flex justify-content-center">
-            <a
-                href="./Visual/HTML/Home.html"
-                class="footer__link nav-link text-white"
-                >Home</a
-            >
-            <a
-                href="./Visual/HTML/Game.html"
-                class="footer__link nav-link text-white"
-                >Play</a
-            >
-            <a
-                href="./Visual/HTML/ContactUs.html"
-                class="footer__link nav-link text-white"
-                >Contact</a
-            >
-            <a
-                href="./Visual/HTML/Ranking.html"
-                class="footer__link nav-link text-white"
-                >Ranking</a
-            >
-        </nav>
+<footer class="footer">
+    <div class="footer__container">
+        <!-- Sección Izquierda: Atribuciones -->
+        <section class="footer__section footer__section--left">
+            <h3 class="footer__title">Atribuciones</h3>
+            <ul class="footer__list">
+                <li class="footer__list-item">
+                    Diseño por
+                    <a
+                        href="https://ejemplo.com/autor-diseño"
+                        class="footer__link"
+                        >Autor del Diseño</a
+                    >
+                </li>
+                <li class="footer__list-item">
+                    Sonido por
+                    <a
+                        href="https://opengameart.org/users/jaggedstone"
+                        class="footer__link"
+                        >JaggedStone</a
+                    >
+                </li>
+            </ul>
+        </section>
 
-        <p class="footer__text mb-2">
-            &copy; 2024 The Forgotten Maze. All rights reserved.
-        </p>
+        <!-- Sección Central -->
+        <section class="footer__section footer__section--center">
+            <h3 class="footer__title">Enlaces Rápidos</h3>
+            <ul class="footer__list">
+                <li class="footer__list-item">
+                    <a href="Home.html" class="footer__link">Inicio</a>
+                </li>
+                <li class="footer__list-item">
+                    <a href="Game.html" class="footer__link">Play</a>
+                </li>
+                <li class="footer__list-item">
+                    <a href="ContactUs.html" class="footer__link">Contacto</a>
+                </li>
+                <li class="footer__list-item">
+                    <a href="Ranking.html" class="footer__link">Ranking</a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Sección Derecha: Donaciones -->
+        <section class="footer__section footer__section--right">
+            <h3 class="footer__title">Donaciones</h3>
+            <p class="footer__text">Apóyanos con una donación:</p>
+            <div class="footer__donation-buttons">
+                <a
+                    class="footer__donation-button"
+                    href="https://www.paypal.com/donate/?hosted_button_id=U5NZNDA6T7WN4"
+                    target="_blank"
+                >
+                    <img
+                        src="../../Assets/Icons/Paypal-icon.svg"
+                        alt="Donar con PayPal"
+                        class="footer__donation-logo"
+                    />
+                </a>
+                <a
+                    class="footer__donation-button"
+                    href="https://link.mercadopago.com.ar/matias372"
+                    target="_blank"
+                >
+                    <img
+                        src="../../Assets/Icons/Mercado-pago-icon.svg"
+                        alt="Donar con Mercado Pago"
+                        class="footer__donation-logo"
+                    />
+                </a>
+            </div>
+        </section>
     </div>
 </footer>
