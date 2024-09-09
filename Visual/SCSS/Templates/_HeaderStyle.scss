@@ -3,16 +3,17 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: rgb(43, 43, 43);
+    background-color: $color-gris-oscuro;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 
+    // Estilos para el logo y el botón de menú
     &__logo-toggle {
         display: flex;
         align-items: center;
-        width: 100%; // Ocupa el 100% del ancho en móviles
-        justify-content: space-between; // Espacio entre el logo y el botón de menú
-        position: relative; // Permite usar posicionamiento absoluto dentro de este contenedor
+        width: 100%;
+        justify-content: space-between;
+        position: relative;
 
         .header__brand {
             text-decoration: none;
@@ -27,34 +28,21 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-
-        .header__profile-img {
-            background-color: white; // Fondo blanco para la imagen
-            border-radius: 50%; // Asegura que el fondo blanco siga la forma de la imagen
-            position: absolute;
-            top: 1rem; // Alinea verticalmente con el botón de cierre
-            left: calc(
-                100% - 3rem
-            ); // Ajusta la posición horizontal a la izquierda del contenedor
-            width: 30px; // Asegúrate de que la imagen y el fondo tengan el mismo tamaño
-            height: 30px;
-            object-fit: cover; // Mantiene la imagen dentro del contenedor
-        }
     }
 
     &__nav {
-        position: fixed; // Posiciona el menú fijo al costado
+        position: fixed;
         top: 0;
-        right: -75%; // Oculta el menú fuera de la pantalla a la derecha
-        width: 70%; // Reduce el ancho del menú
+        right: -75%;
+        width: 70%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.85); // Fondo oscuro con opacidad
-        color: white; // Letras blancas
-        transition: right 0.3s ease; // Transición suave
-        z-index: 1000; // Asegura que el menú esté sobre otros elementos
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white;
+        transition: right 0.3s ease;
+        z-index: 1000;
 
         &.active {
-            right: 0; // Muestra el menú al activar
+            right: 0;
         }
 
         .header__close-menu-btn {
@@ -66,14 +54,14 @@
             cursor: pointer;
             position: absolute;
             top: 1rem;
-            right: 1rem; // Mueve el botón a la parte superior derecha
+            right: 1rem;
         }
 
         .header__nav-content {
             display: flex;
             flex-direction: column;
             align-items: center !important;
-            padding-top: 4rem; // Espaciado desde el top
+            padding-top: 4rem;
         }
 
         .nav-link {
@@ -84,49 +72,118 @@
             text-decoration: none;
 
             &:hover {
-                background-color: rgba(
-                    255,
-                    255,
-                    255,
-                    0.2
-                ); // Efecto hover en blanco con opacidad
+                background-color: rgba(255, 255, 255, 0.2);
             }
         }
     }
 
     &__session-links {
-        margin-top: 1rem;
         display: flex;
         flex-direction: column;
+        position: relative; // Necesario para el menú desplegable de perfil
 
-        .header__profile {
+        .header__profile-menu {
             display: flex;
             flex-direction: column;
-            img {
+        }
+        .header__profile-img {
+            background-color: white;
+            object-fit: cover; // Mantiene la imagen dentro del contenedor
+
+            // Estilos para pantallas pequeñas (menos de 768px)
+            @media (max-width: 767px) {
+                position: absolute;
+                top: -17rem;
+                left: -4rem;
                 width: 50px;
                 height: 50px;
-                background-color: white;
-                position: absolute;
-                left: 1rem;
-                top: 1rem;
+            }
+
+            // Estilos para pantallas grandes (768px o más)
+            @media (min-width: 768px) {
+                position: static; // No es necesario en pantallas grandes
+                margin-left: 1rem; // Espacio a la izquierda en pantallas grandes
+                width: 50px;
+                height: 50px;
             }
         }
+        // Estilos para pantallas grandes
+        @media (min-width: 768px) {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-left: auto;
 
-        .nav-link {
-            padding: 1rem;
-            color: white;
+            .header__profile {
+                display: flex;
+                align-items: center;
+                cursor: pointer; // Cambia el cursor a pointer para mostrar que es clicable
+                position: relative;
+
+                // Imagen de perfil
+                .header__profile-img {
+                    width: 50px;
+                    height: 50px;
+                    margin-right: 1rem; // Espacio a la derecha de la imagen
+                }
+
+                // Menú desplegable debajo de la imagen de perfil
+                .header__profile-menu {
+                    display: none; // Oculto por defecto
+                    position: absolute;
+                    top: 100%; // Debajo de la imagen
+                    left: 0;
+                    background-color: white;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    z-index: 1001;
+                    padding: 0.5rem;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+                    a {
+                        display: block;
+                        padding: 0.5rem;
+                        text-decoration: none;
+                        color: $color-gris-oscuro;
+
+                        &:hover {
+                            background-color: #f5f5f5;
+                        }
+                    }
+                }
+
+                &:hover .header__profile-menu {
+                    display: block; // Muestra el menú al pasar el ratón
+                }
+            }
+
+            // Estilo para botones de "Log in" y "Sign up"
+            .nav-link {
+                background-color: white;
+                color: $color-gris-oscuro;
+                padding: 0.5rem 1rem;
+                margin-left: 0.5rem;
+                border-radius: 5px;
+                border: 1px solid transparent;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: $color-gris-oscuro;
+                    color: white;
+                }
+            }
         }
     }
 
     // Estilos para dispositivos más grandes
     @media (min-width: 768px) {
         &__nav {
-            position: static; // Menú estático en pantallas grandes
+            position: static;
             width: auto;
             height: auto;
-            background-color: transparent; // Fondo transparente en pantallas grandes
-            color: inherit; // Hereda el color del texto
-            transition: none; // Sin transición en pantallas grandes
+            background-color: transparent;
+            color: inherit;
+            transition: none;
             right: auto;
             display: flex;
             flex-direction: row;
@@ -142,11 +199,6 @@
         .header__nav-content {
             flex-direction: row;
             padding-top: 0;
-        }
-
-        .header__profile-img {
-            position: static; // No es necesario en pantallas grandes
-            margin-left: 1rem; // Espacio a la izquierda en pantallas grandes
         }
     }
 }
