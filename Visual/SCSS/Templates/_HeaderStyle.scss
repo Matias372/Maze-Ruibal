@@ -6,6 +6,7 @@
     background-color: $color-gris-oscuro;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    height: 88px;
 
     // Estilos para el logo y el botón de menú
     &__logo-toggle {
@@ -65,6 +66,8 @@
         }
 
         .nav-link {
+            width: 90px !important;
+            height: 55px;
             padding: 1rem;
             width: 100%;
             text-align: center;
@@ -109,7 +112,8 @@
         }
         // Estilos para pantallas grandes
         @media (min-width: 768px) {
-            display: flex;
+            display: flex !important;
+            flex-direction: row;
             align-items: center;
             justify-content: flex-end;
             margin-left: auto;
@@ -130,11 +134,12 @@
                 // Menú desplegable debajo de la imagen de perfil
                 .header__profile-menu {
                     display: none; // Oculto por defecto
+                    width: 100px;
                     position: absolute;
                     top: 100%; // Debajo de la imagen
-                    left: 0;
-                    background-color: white;
-                    border: 1px solid #ddd;
+                    left: -10%;
+                    background-color: $color-gris-oscuro;
+                    border: 1px solid $color-gris-medio;
                     border-radius: 5px;
                     z-index: 1001;
                     padding: 0.5rem;
@@ -144,10 +149,10 @@
                         display: block;
                         padding: 0.5rem;
                         text-decoration: none;
-                        color: $color-gris-oscuro;
+                        color: white;
 
                         &:hover {
-                            background-color: #f5f5f5;
+                            background-color: $color-gris-medio;
                         }
                     }
                 }
@@ -158,17 +163,16 @@
             }
 
             // Estilo para botones de "Log in" y "Sign up"
-            .nav-link {
-                background-color: white;
-                color: $color-gris-oscuro;
+            a {
+                background-color: $color-gris-oscuro;
+                color: white;
                 padding: 0.5rem 1rem;
-                margin-left: 0.5rem;
                 border-radius: 5px;
                 border: 1px solid transparent;
                 transition: background-color 0.3s ease;
 
                 &:hover {
-                    background-color: $color-gris-oscuro;
+                    background-color: $color-gris-medio;
                     color: white;
                 }
             }

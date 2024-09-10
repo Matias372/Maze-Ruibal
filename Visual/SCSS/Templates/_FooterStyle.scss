@@ -1,13 +1,14 @@
 .footer {
-    background-color: #333;
+    background-color: $color-gris-oscuro;
     color: #fff;
+    font-family: Arial, Helvetica, sans-serif !important;
     padding: 20px 10px; // Espacio reducido para móviles
     text-align: center;
 
     &__container {
         display: flex;
         flex-direction: column; // Apilar las secciones para móviles
-        align-items: center;
+        align-items: flex-start;
         max-width: 100%;
         margin: 0 auto;
         padding: 0 10px;
@@ -82,6 +83,7 @@
 
     .footer__title {
         font-size: 20px;
+        font-weight: bold;
     }
 
     .footer__donation-logo {
