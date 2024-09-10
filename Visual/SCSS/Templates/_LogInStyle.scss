@@ -4,4 +4,10 @@
     align-items: center;
     justify-content: center;
     min-height: 70vh;
+    gap: 20px;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
 }

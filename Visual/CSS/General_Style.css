@@ -12,10 +12,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #2e302f;
+  background-color: #050606;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  height: 88px;
+  height: 10vh;
 }
 .header__logo-toggle {
   display: flex;
@@ -154,7 +154,6 @@
     display: block;
   }
   .header__session-links a {
-    background-color: #2e302f;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -191,38 +190,52 @@
 }
 
 .home__main {
-  width: 100vw !important;
+  width: 100% !important;
+  background-color: #050606;
+}
+.home__main div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 .home__main div div {
+  display: flex;
+  align-items: center;
   margin: 0;
   padding: 0;
 }
 .home__main div div img {
-  width: 100% !important;
+  width: 100%;
+  max-width: 1000px !important;
   min-height: 252px;
+  border: 2px solid #fefefe;
 }
 .home__main div #Home-description {
-  background-color: wheat;
+  background-color: #596161;
   padding: 1rem;
   width: 100vw !important;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .home__main div #Home-description p {
-  font-family: "Special Elite", cursive;
-  color: black;
+  font-family: Arial, Helvetica, sans-serif !important;
+  color: #fefefe;
   font-size: large;
   font-weight: normal;
 }
 .home__main div #Home-description a {
-  background-color: darkgreen;
-  border: 2px solid black;
-  color: white;
+  background-color: #dc0113;
+  color: #fefefe;
   text-decoration: none;
-  padding: 0.5rem;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 0.5rem 25px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+.home__main div #Home-description a:hover {
+  background-color: #a9010f;
 }
 
 .signup-main {
@@ -231,6 +244,11 @@
   align-items: center;
   justify-content: center;
   min-height: 70vh;
+  gap: 20px;
+}
+.signup-main__form {
+  display: flex;
+  flex-direction: column;
 }
 
 .login-main {
@@ -239,6 +257,11 @@
   align-items: center;
   justify-content: center;
   min-height: 70vh;
+  gap: 20px;
+}
+.login-main__form {
+  display: flex;
+  flex-direction: column;
 }
 
 main.user__profile {
@@ -321,8 +344,9 @@ main.user__profile .profile__delete .profile__button {
 }
 
 .footer {
-  background-color: #2e302f;
-  color: #fff;
+  height: 20vh;
+  background-color: #050606;
+  color: #fefefe;
   font-family: Arial, Helvetica, sans-serif !important;
   padding: 20px 10px;
   text-align: center;
@@ -342,6 +366,7 @@ main.user__profile .profile__delete .profile__button {
 .footer__title {
   margin-bottom: 10px;
   font-size: 18px;
+  font-weight: bold;
 }
 .footer__list {
   list-style: none;
@@ -350,21 +375,26 @@ main.user__profile .profile__delete .profile__button {
 }
 .footer__list-item {
   margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #f1f1f1;
 }
 .footer__link {
-  color: #fff;
+  font-size: 0.9rem;
+  color: #f1f1f1;
   text-decoration: none;
 }
 .footer__link:hover {
   text-decoration: underline;
 }
 .footer__text {
+  font-size: 0.9rem;
+  color: #f1f1f1;
   margin: 10px 0;
 }
 .footer__donation-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 30px;
   margin-top: 10px;
 }
 .footer__donation-button {
@@ -374,7 +404,7 @@ main.user__profile .profile__delete .profile__button {
   padding: 5px;
 }
 .footer__donation-logo {
-  width: 80px;
+  width: 45px;
   height: auto;
   display: block;
 }
@@ -393,9 +423,6 @@ main.user__profile .profile__delete .profile__button {
     font-size: 20px;
     font-weight: bold;
   }
-  .footer__donation-logo {
-    width: 100px;
-  }
 }
 @media (min-width: 1024px) {
   .footer {
@@ -407,85 +434,74 @@ main.user__profile .profile__delete .profile__button {
   .footer__section {
     padding: 10px;
   }
-  .footer__donation-logo {
-    width: 120px;
-  }
 }
 .ranking {
-  background-color: #f0f0f0;
+  min-height: 70vh;
+  padding: 0.5rem;
+  color: #fefefe;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 .ranking__title {
-  font-family: "Press Start 2P", cursive;
-  font-size: 2rem;
-  color: #00ff00;
-  text-shadow: 2px 2px 0 #333;
-  padding-top: 1.5rem;
-  padding-bottom: 1rem;
-  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #fefefe;
 }
 .ranking__table {
   width: 100%;
   border-collapse: collapse;
   margin: 0 auto;
-  background-color: #000;
-  color: #fff;
-  font-family: "Special Elite", cursive;
+  background-color: #050606;
+  font-size: 0.65rem;
 }
 .ranking__thead {
-  background-color: #222;
+  background-color: #4a6d7c;
+  color: #fefefe;
 }
-.ranking__th {
-  padding: 0.1rem;
-  border: 2px solid #00ff00;
-  text-align: center;
-  font-size: 0.55rem;
-  font-family: "Press Start 2P", cursive;
-  color: #00ff00;
+.ranking__thead th {
+  padding: 0.5rem;
+  text-transform: uppercase;
 }
-.ranking__tbody {
-  background-color: #000;
+.ranking__tbody tr:nth-child(even) {
+  background-color: #596161;
 }
-.ranking__row {
-  border-bottom: 1px solid #333;
+.ranking__tbody tr:nth-child(odd) {
+  background-color: #2e302f;
 }
-.ranking__cell {
-  padding: 0.1rem;
-  text-align: center;
-  font-size: 0.55rem;
-  color: #fff;
-  font-size: large;
-  font-family: sans-serif !important;
-}
-.ranking__empty-cell {
-  color: #888;
-}
-@media (max-width: 768px) {
-  .ranking__title {
-    font-size: 1rem;
-  }
-  .ranking__th, .ranking__cell {
-    padding: 0.7rem;
-    font-size: 0.6rem;
-  }
-  .ranking .ranking__cell {
-    font-size: small !important;
-    font-family: sans-serif !important;
-  }
-}
-@media (max-width: 480px) {
-  .ranking__title {
-    font-size: 1rem;
-  }
-  .ranking__th, .ranking__cell {
-    padding: 0.5rem;
-    font-size: 0.55rem;
-  }
-  .ranking .ranking__cell {
-    font-size: small !important;
-    font-family: sans-serif !important;
-  }
+.ranking__tbody tr td {
+  padding: 0.4rem;
+  color: #fefefe;
+  word-wrap: break-word;
 }
 
+@media (min-width: 768px) {
+  .ranking {
+    padding: 1rem;
+  }
+  .ranking__title {
+    font-size: 1.5rem;
+  }
+  .ranking__table {
+    font-size: 0.85rem;
+  }
+  .ranking th,
+  .ranking td {
+    padding: 0.75rem;
+  }
+}
+@media (min-width: 1024px) {
+  .ranking__title {
+    font-size: 2rem;
+  }
+  .ranking__table {
+    width: 90%;
+    font-size: 1rem;
+  }
+  .ranking th,
+  .ranking td {
+    padding: 1rem;
+  }
+}
 .game-main {
   width: 100%;
   display: flex;
@@ -562,6 +578,87 @@ main.user__profile .profile__delete .profile__button {
   font-size: 0.7rem;
   text-align: start;
   padding: 20px;
+}
+
+body {
+  background-color: #050606;
+  color: #fefefe;
+}
+body .main {
+  padding: 2rem;
+  background-color: #2e302f;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 2rem auto;
+}
+body .main--contact .main__title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.5rem;
+  color: #fefefe;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+body .main--contact .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+body .main--contact .contact-form__group {
+  margin-bottom: 1rem;
+}
+body .main--contact .contact-form__label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  color: #fefefe;
+  margin-bottom: 0.5rem;
+}
+body .main--contact .contact-form__input, body .main--contact .contact-form__select, body .main--contact .contact-form__textarea {
+  border-radius: 4px;
+  border: 1px solid #fefefe;
+  font-size: 1rem;
+  background-color: #050606;
+  color: #fefefe;
+}
+body .main--contact .contact-form__button {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #70cfe2;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+body .main--contact .contact-form__button:hover {
+  background-color: #37515c;
+  transform: scale(1.05);
+}
+body .main--contact .contact-form__response-message {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  text-align: center;
+  color: #fefefe;
+  background-color: #7c4a52;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+@media (min-width: 576px) {
+  body .main {
+    padding: 2.5rem;
+  }
+}
+@media (min-width: 768px) {
+  body .main {
+    padding: 3rem;
+  }
+}
+@media (min-width: 992px) {
+  body .main {
+    padding: 4rem;
+  }
 }
 
 /*# sourceMappingURL=General_Style.css.map */

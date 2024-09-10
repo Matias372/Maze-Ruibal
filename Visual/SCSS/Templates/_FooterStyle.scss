@@ -1,6 +1,7 @@
 .footer {
-    background-color: $color-gris-oscuro;
-    color: #fff;
+    height: 20vh;
+    background-color: $color-negro-profundo;
+    color: #fefefe;
     font-family: Arial, Helvetica, sans-serif !important;
     padding: 20px 10px; // Espacio reducido para móviles
     text-align: center;
@@ -22,6 +23,7 @@
     &__title {
         margin-bottom: 10px;
         font-size: 18px;
+        font-weight: bold;
     }
 
     &__list {
@@ -32,10 +34,13 @@
 
     &__list-item {
         margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: #f1f1f1;
     }
 
     &__link {
-        color: #fff;
+        font-size: 0.9rem;
+        color: #f1f1f1;
         text-decoration: none;
 
         &:hover {
@@ -44,13 +49,15 @@
     }
 
     &__text {
+        font-size: 0.9rem;
+        color: #f1f1f1;
         margin: 10px 0;
     }
 
     &__donation-buttons {
         display: flex;
         justify-content: center;
-        gap: 10px;
+        gap: 30px;
         margin-top: 10px;
     }
 
@@ -62,7 +69,7 @@
     }
 
     &__donation-logo {
-        width: 80px; // Tamaño más pequeño para móviles
+        width: 45px; // Tamaño más pequeño para móviles
         height: auto;
         display: block;
     }
@@ -85,10 +92,6 @@
         font-size: 20px;
         font-weight: bold;
     }
-
-    .footer__donation-logo {
-        width: 100px; // Tamaño del logo más grande para tabletas
-    }
 }
 
 @media (min-width: 1024px) {
@@ -102,9 +105,5 @@
 
     .footer__section {
         padding: 10px;
-    }
-
-    .footer__donation-logo {
-        width: 120px; // Tamaño del logo aún más grande para escritorio
     }
 }

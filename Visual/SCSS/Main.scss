@@ -6,15 +6,19 @@
 
 // Variables de fuentes
 $pixelfont: "Press Start 2P", cursive;
-$homefont: "Special Elite", cursive;
+$homefont: Arial, Helvetica, sans-serif;
 
 // Variables de colores
+$color-negro-profundo: #050606;
 $color-gris-oscuro: #2e302f; // Para fondos principales
 $color-blanco: #fefefe; // Para textos principales
 $color-azul-oscuro-apagado: #4a6d7c; // Para botones, enlaces y elementos interactivos
 $color-rojo-oscuro-marron: #7c4a52; // Para alertas, mensajes de error o elementos que requieran atención
 $color-oro-envejecido: #b7a57a; // Para detalles importantes, elementos especiales y resaltar información
 $color-gris-medio: #596161; // Para fondos de secciones, bordes y separadores
+$color-detalle-textura: #3d3d3d; // Gris medio (adicional) - Sombras y detalles de textura.
+$color-resaltado: #dc0113; // Rojo brillante - Velas, detalles llamativos en el escenario.
+$color-agua: #70cfe2; // Azul claro - Agua de la fuente o efectos relacionados con líquidos.
 
 // FONTS
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
@@ -29,3 +33,4 @@ $color-gris-medio: #596161; // Para fondos de secciones, bordes y separadores
 @import "Templates/_FooterStyle.scss";
 @import "Templates/_RankingStyle.scss";
 @import "Templates/_GameStyle.scss";
+@import "Templates/_ContactUsStyle.scss";

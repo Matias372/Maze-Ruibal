@@ -1,97 +1,89 @@
-// Estilos principales
-.ranking {
-    // Fondo del main
-    background-color: #f0f0f0; // Gris claro para el fondo
+// Estilo de la tabla de ranking - Mobile First
 
-    // Título
+.ranking {
+    min-height: 70vh;
+    padding: 0.5rem;
+    color: $color-blanco;
+    font-family: $homefont; // Fuente alternativa para mejor legibilidad en pantallas pequeñas
+    text-align: center;
+
     &__title {
-        font-family: $pixelfont;
-        font-size: 2rem;
-        color: #00ff00; // Verde retro
-        text-shadow: 2px 2px 0 #333; // Sombra para efecto 3D
-        padding-top: 1.5rem;
-        padding-bottom: 1rem;
-        text-align: center;
+        font-size: 1.25rem; // Tamaño de fuente reducido para títulos en móvil
+        margin-bottom: 1rem;
+        color: $color-blanco;
     }
 
-    // Tabla
     &__table {
         width: 100%;
         border-collapse: collapse;
         margin: 0 auto;
-        background-color: #000; // Fondo negro para el estilo retro
-        color: #fff; // Texto blanco para contraste
-        font-family: $homefont;
+        background-color: $color-negro-profundo;
+        font-size: 0.65rem; // Tamaño de fuente más pequeño para móviles
     }
 
-    // Cabecera de la tabla
     &__thead {
-        background-color: #222; // Fondo oscuro para la cabecera
-    }
+        background-color: $color-azul-oscuro-apagado;
+        color: $color-blanco;
 
-    &__th {
-        padding: 0.1rem; // Ajuste de padding
-        border: 2px solid #00ff00; // Borde verde para estilo retro
-        text-align: center;
-        font-size: 0.55rem; // Tamaño reducido para mejor ajuste en pantallas pequeñas
-        font-family: $pixelfont;
-        color: #00ff00;
-    }
-
-    // Cuerpo de la tabla
-    &__tbody {
-        background-color: #000; // Fondo negro para el cuerpo de la tabla
-    }
-
-    &__row {
-        border-bottom: 1px solid #333; // Línea inferior de cada fila
-    }
-
-    &__cell {
-        padding: 0.1rem;
-        text-align: center;
-        font-size: 0.55rem;
-        color: #fff;
-        font-size: large;
-        font-family: sans-serif !important;
-    }
-
-    // Estilo para filas vacías
-    &__empty-cell {
-        color: #888; // Texto gris para celdas vacías
-    }
-
-    // Responsividad para pantallas pequeñas
-    @media (max-width: 768px) {
-        &__title {
-            font-size: 1rem;
-        }
-
-        &__th,
-        &__cell {
-            padding: 0.7rem;
-            font-size: 0.6rem;
-        }
-        .ranking__cell {
-            font-size: small !important;
-            font-family: sans-serif !important;
-        }
-    }
-
-    // Responsividad para pantallas muy pequeñas
-    @media (max-width: 480px) {
-        &__title {
-            font-size: 1rem;
-        }
-
-        &__th,
-        &__cell {
+        th {
             padding: 0.5rem;
-            font-size: 0.55rem;
+            text-transform: uppercase;
         }
-        .ranking__cell {
-            font-size: small !important;
-            font-family: sans-serif !important;
+    }
+
+    &__tbody {
+        tr {
+            &:nth-child(even) {
+                background-color: $color-gris-medio;
+            }
+
+            &:nth-child(odd) {
+                background-color: $color-gris-oscuro;
+            }
+
+            td {
+                padding: 0.4rem;
+                color: $color-blanco;
+                word-wrap: break-word; // Asegura que el texto se ajuste a la celda
+            }
+        }
+    }
+}
+
+// Estilos Responsive
+@media (min-width: 768px) {
+    .ranking {
+        padding: 1rem;
+
+        &__title {
+            font-size: 1.5rem; // Incrementa ligeramente para pantallas medianas
+        }
+
+        &__table {
+            font-size: 0.85rem; // Tamaño de fuente un poco más grande para pantallas medianas
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .ranking {
+        &__title {
+            font-size: 2rem; // Título más grande para pantallas grandes
+        }
+
+        &__table {
+            width: 90%;
+            font-size: 1rem; // Tamaño de fuente más grande para pantallas grandes
+        }
+
+        th,
+        td {
+            padding: 1rem;
         }
     }
 }
