@@ -1,4 +1,5 @@
 <?php
+// Incluye el archivo de conexión a la base de datos
 // Configuración de la conexión a la base de datos
 $servername = "localhost"; // Cambia localhost por la dirección del servidor de tu base de datos si es diferente
 $username = "root"; // Cambia "tu_usuario" por el nombre de usuario de tu base de datos

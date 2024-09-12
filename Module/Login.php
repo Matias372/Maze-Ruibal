@@ -1,18 +1,8 @@
 <?php
-// Incluye el archivo de conexión a la base de datos
-// Configuración de la conexión a la base de datos
-$servername = "localhost"; // Cambia localhost por la dirección del servidor de tu base de datos si es diferente
-$username = "root"; // Cambia "tu_usuario" por el nombre de usuario de tu base de datos
-$password = ""; // Cambia "tu_contraseña" por la contraseña de tu base de datos
-$database = "maze_db"; // Cambia "nombre_de_tu_base_de_datos" por el nombre de tu base de datos
+require 'db_connection.php'; // Asegúrate de tener un archivo para conectar a la base de datos
 
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("La conexión falló: " . $conn->connect_error);
-}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Verifica que los datos POST estén definidos
 if (isset($_POST['email']) && isset($_POST['password'])) {
@@ -35,7 +25,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             $userId = $row['id'];
             $username = $row['user'];
             $hashedPassword = $row['password'];
-            $imagen = $row['imagen'];
+            $imagenBlob = $row['imagen']; // Obtener el BLOB de la imagen
             $floor = $row['floor'];
             $time = $row['time'];
 
@@ -51,11 +41,14 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                 $update_sql->execute();
                 $update_sql->close();
 
+                // Convertir el BLOB de imagen a base64 para usar en la sesión
+                $imagenBase64 = $imagenBlob ? 'data:image/webp;base64,' . base64_encode($imagenBlob) : '';
+
                 // Guardar los valores en variables de sesión
                 $_SESSION['user_id'] = $userId;
                 $_SESSION['user'] = $username;
                 $_SESSION['mail'] = $email;
-                $_SESSION['imagen'] = $imagen;
+                $_SESSION['imagen'] = $imagenBase64;
                 $_SESSION['floor'] = $floor;
                 $_SESSION['time'] = $time;
 

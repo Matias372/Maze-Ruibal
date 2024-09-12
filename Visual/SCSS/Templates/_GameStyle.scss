@@ -26,25 +26,28 @@
         }
 
         .scene__background {
-            background-color: rgba(255, 0, 0, 0.5); // Rojo con 50% de opacidad
+            background-size: contain;
+            background-image: url("../../Assets/Background/Corridor-Straigth.webp"); // Rojo con 50% de opacidad
             z-index: 1; // Fondo más bajo
         }
 
         .scene__filter {
-            background-color: rgba(0, 255, 0, 0.5); // Verde con 50% de opacidad
+            background-size: contain;
+            background-image: url("../../Assets/Background/filter-light-wp.webp"); // Verde con 50% de opacidad
             z-index: 2; // Encima del fondo
         }
 
         .scene__interface {
-            background-color: rgba(0, 0, 255, 0.5); // Azul con 50% de opacidad
             z-index: 3; // Encima del filtro
         }
 
         .scene__effects {
+            display: none;
+            background-size: contain;
             background-color: rgba(
                 255,
-                255,
-                0,
+                46,
+                39,
                 0.5
             ); // Amarillo con 50% de opacidad
             z-index: 4; // Encima de la interfaz

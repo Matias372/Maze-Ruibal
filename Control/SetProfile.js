@@ -1,31 +1,164 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Crear una solicitud AJAX para obtener los datos del perfil
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", "../../Module/Get_profile_data.php", true); // Cambia 'get_profile_data.php' por el nombre de tu script PHP
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
+    // Función para cargar los datos del perfil
+    function loadProfileData() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "../../Module/Get_profile_data.php", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
 
-                // Verificar si la respuesta contiene datos válidos
-                if (response.loggedIn) {
-                    // Actualizar los elementos del perfil con los datos obtenidos
-                    document.querySelector(".profile__image").src =
-                        response.profileImage;
-                    document.querySelector("#username").textContent =
-                        response.username;
-                    document.querySelector("#mail").textContent = response.mail;
-                    document.querySelector(
-                        "#best-score"
-                    ).textContent = `Floor: ${response.floor}, Time: ${response.time}`;
+                    if (response.loggedIn) {
+                        document.querySelector(".profile__image").src =
+                            response.profileImage;
+                        document.querySelector("#username").textContent =
+                            response.username;
+                        document.querySelector("#mail").textContent =
+                            response.mail;
+                        document.querySelector(
+                            "#best-score"
+                        ).textContent = `Floor: ${response.floor}, Time: ${response.time}`;
+                    } else {
+                        window.location.href = "LogIn.html";
+                    }
                 } else {
-                    // Redirigir al usuario a la página de inicio de sesión si no está autenticado
-                    window.location.href = "LogIn.html";
+                    console.error(
+                        "Error en la solicitud de perfil",
+                        xhr.statusText
+                    );
                 }
-            } else {
-                console.error("Error en la solicitud de perfil");
             }
+        };
+        xhr.send();
+    }
+
+    // Cargar los datos del perfil al cargar la página
+    loadProfileData();
+
+    // Manejar el clic en el botón "Change Image" para abrir el selector de archivos
+    document.querySelector("#change-image").addEventListener("click", () => {
+        document.querySelector("#profileImageInput").click();
+    });
+
+    // Manejar el cambio en el selector de archivos
+    document
+        .querySelector("#profileImageInput")
+        .addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                console.log("Selected file:", file);
+
+                const formData = new FormData();
+                formData.append("profileImage", file);
+
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "../../Module/UploadProfileImage.php", true);
+                xhr.onload = function () {
+                    console.log("Response received:", xhr.responseText);
+
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            document.querySelector(".profile__image").src =
+                                response.newImageUrl;
+                            alert("Image updated successfully!");
+                            location.reload();
+                        } else {
+                            alert(
+                                "Error: " +
+                                    (response.message ||
+                                        "Failed to update image")
+                            );
+                        }
+                    } catch (e) {
+                        console.error("Error parsing JSON response", e);
+                        alert("An unexpected error occurred.");
+                    }
+                };
+                xhr.onerror = function () {
+                    console.error("Network error:", xhr.statusText);
+                    alert("An error occurred while updating the image.");
+                };
+                console.log("Sending form data:", formData);
+                xhr.send(formData);
+            }
+        });
+
+    // Manejar el clic en el botón "Change Mail"
+    document.querySelector("#change-mail").addEventListener("click", () => {
+        $("#emailModal").modal("show"); // Muestra el modal
+    });
+
+    // Manejar el clic en el botón "Change Email" dentro del modal
+    document.querySelector("#submitEmail").addEventListener("click", () => {
+        const newEmail = document.querySelector("#newEmail").value;
+        if (newEmail) {
+            const formData = new FormData();
+            formData.append("newEmail", newEmail);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "../../Module/UpdateEmail.php", true);
+            xhr.onload = function () {
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        document.querySelector("#mail").textContent = newEmail;
+                        $("#emailModal").modal("hide"); // Oculta el modal
+                        alert("Email updated successfully!");
+                    } else {
+                        alert(
+                            "Error: " +
+                                (response.message || "Failed to update email")
+                        );
+                    }
+                } catch (e) {
+                    console.error("Error parsing JSON response", e);
+                    alert("An unexpected error occurred.");
+                }
+            };
+
+            xhr.onerror = function () {
+                console.error("Network error:", xhr.statusText);
+                alert("An error occurred while updating the email.");
+            };
+            xhr.send(formData);
         }
-    };
-    xhr.send();
+    });
+
+    // Manejar el clic en el botón "Delete Account"
+    document
+        .querySelector(".profile__delete .btn-danger")
+        .addEventListener("click", () => {
+            if (
+                confirm(
+                    "Are you sure you want to delete your account? This action cannot be undone."
+                )
+            ) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "../../Module/DeleteAccount.php", true);
+                xhr.onload = function () {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            alert("Account deleted successfully!");
+                            window.location.href = "LogIn.html"; // Redirigir a la página de inicio de sesión
+                        } else {
+                            alert(
+                                "Error: " +
+                                    (response.message ||
+                                        "Failed to delete account")
+                            );
+                        }
+                    } catch (e) {
+                        console.error("Error parsing JSON response", e);
+                        alert("An unexpected error occurred.");
+                    }
+                };
+                xhr.onerror = function () {
+                    console.error("Network error:", xhr.statusText);
+                    alert("An error occurred while deleting the account.");
+                };
+                xhr.send();
+            }
+        });
 });

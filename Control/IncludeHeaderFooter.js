@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // Cambiar el contenido del header para usuarios autenticados
                         sessionLinks.innerHTML = `
                             <div class="header__profile d-flex align-items-center">
-                                <img src="${response.profileImage}" alt="Profile Image" class="header__profile-img rounded-circle me-2" width="30" height="30"/>
+                                <img src="${response.profileImage}" alt="Profile Image" class="header__profile-img me-2" width="30" height="30"/>
                                 <div class="header__profile-menu">
                                     <a href="Profile.html" class="header__link nav-link">Profile</a>
                                     <a href="../../Module/logout.php" class="header__link nav-link">Log Out</a>
@@ -99,3 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.toggleMenu = toggleMenu; // Exponer toggleMenu para uso en el HTML
 });
+
+function showDonationPopup() {
+    document.getElementById("donationPopup").style.display = "flex";
+}
+
+function closeDonationPopup() {
+    document.getElementById("donationPopup").style.display = "none";
+}

@@ -60,18 +60,47 @@
                         class="footer__donation-logo"
                     />
                 </a>
-                <a
+                <button
                     class="footer__donation-button"
-                    href="https://link.mercadopago.com.ar/matias372"
-                    target="_blank"
+                    onclick="showDonationPopup()"
                 >
                     <img
                         src="../../Assets/Icons/Mercado-pago-icon.svg"
                         alt="Donar con Mercado Pago"
                         class="footer__donation-logo"
                     />
-                </a>
+                </button>
             </div>
         </section>
     </div>
 </footer>
+
+<!-- Pop-up de donación -->
+<div class="donation-popup" id="donationPopup">
+    <div class="donation-popup__content">
+        <span class="donation-popup__close" onclick="closeDonationPopup()"
+            >&times;</span
+        >
+        <h1 class="donation-popup__title">Apóyanos con una Donación</h1>
+        <p class="donation-popup__description">
+            Tu apoyo es fundamental para continuar con nuestro proyecto. Si
+            deseas realizar una donación, puedes hacerlo a través de una
+            transferencia bancaria utilizando los siguientes datos:
+        </p>
+        <div class="donation-popup__details">
+            <p class="donation-popup__details-item">
+                <strong>Alias:</strong> mr.dev.code.mp
+            </p>
+            <p class="donation-popup__details-item">
+                <strong>CBU:</strong> 0000003100005843935522
+            </p>
+            <p class="donation-popup__details-item">
+                <strong>Titular de la cuenta:</strong> Matias Ruibal
+            </p>
+            <p class="donation-popup__note">
+                Nota: Al realizar la transferencia, por favor especifica que se
+                trata de una donación. ¡Muchas gracias por tu apoyo!
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,177 @@
+Primera Entrega: Estructura Inicial del Proyecto
+Comandos y Funciones:
+
+HTML:
+
+Estructura básica de la página.
+
+<script src="script.js"></script> para vincular el archivo JavaScript.
+
+JavaScript:
+
+Algoritmo Condicional:
+
+javascript
+Copiar código
+if (condición) {
+// código
+} else if (otra condición) {
+// código
+} else {
+// código
+}
+Algoritmo con Ciclo:
+
+javascript
+Copiar código
+for (let i = 0; i < array.length; i++) {
+// código
+}
+Funciones:
+
+javascript
+Copiar código
+function nombreFuncion(parametros) {
+// código
+}
+CSS (opcional):
+
+Define el estilo básico para la interfaz.
+Segunda Entrega: Variables, Objetos y Funciones
+Comandos y Funciones:
+
+JavaScript:
+Variables:
+
+javascript
+Copiar código
+let variable = valor;
+const constante = valor;
+Objetos:
+
+javascript
+Copiar código
+const objeto = {
+propiedad1: valor1,
+propiedad2: valor2
+};
+Arrays:
+
+javascript
+Copiar código
+const array = [elemento1, elemento2, elemento3];
+Métodos de Arrays:
+
+javascript
+Copiar código
+array.push(elemento); // Agrega un elemento al final
+array.pop(); // Elimina el último elemento
+array.shift(); // Elimina el primer elemento
+array.unshift(elemento); // Agrega un elemento al principio
+array.filter(callback); // Filtra los elementos
+Funciones y Métodos:
+
+javascript
+Copiar código
+function procesarDatos(datos) {
+// código
+}
+
+const metodo = function() {
+// código
+};
+Tercera Entrega: Uso de JSON, Storage, y Manipulación del DOM
+Comandos y Funciones:
+
+JavaScript:
+
+JSON:
+
+javascript
+Copiar código
+fetch('datos.json')
+.then(response => response.json())
+.then(data => {
+// código con datos
+});
+Storage:
+
+javascript
+Copiar código
+localStorage.setItem('clave', 'valor');
+const valor = localStorage.getItem('clave');
+localStorage.removeItem('clave');
+Manipulación del DOM:
+
+javascript
+Copiar código
+document.getElementById('id').textContent = 'nuevo texto';
+document.querySelector('.clase').addEventListener('click', () => {
+// código
+});
+Eventos:
+
+javascript
+Copiar código
+element.addEventListener('evento', function() {
+// código
+});
+Uso de Librerías de Animación:
+
+Animista:
+
+Agrega la librería en tu HTML:
+html
+Copiar código
+
+<link rel="stylesheet" href="path/to/animista.css">
+Usa las clases de animación en tu CSS o HTML:
+html
+Copiar código
+<div class="animista-animation"></div>
+Animate.css:
+
+Agrega la librería en tu HTML:
+html
+Copiar código
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+Usa las clases de animación en tu CSS o HTML:
+html
+Copiar código
+<div class="animate__animated animate__bounce">Contenido</div>
+Entrega Final: Proyecto Completo
+Comandos y Funciones:
+
+JavaScript:
+Integración de Librerías:
+
+Incluye la librería en tu HTML:
+html
+Copiar código
+
+<script src="path/to/libreria.js"></script>
+
+Usa las funciones o métodos proporcionados por la librería:
+javascript
+Copiar código
+libreria.funcion();
+Uso Avanzado de JSON y Storage:
+
+Manipula datos y estado del juego usando JSON y localStorage.
+Manipulación del DOM con Librerías:
+
+Usa las librerías para animaciones y manipulación del DOM para mejorar la interacción y dinamismo.
+Promesas y Fetch:
+
+javascript
+Copiar código
+fetch('url/api')
+.then(response => response.json())
+.then(data => {
+// Procesar datos
+})
+.catch(error => {
+console.error('Error:', error);
+});
+Asegúrate de adaptar cada sección del proyecto para cumplir con los requisitos específicos de cada entrega.

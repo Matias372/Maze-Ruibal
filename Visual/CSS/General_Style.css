@@ -87,6 +87,7 @@
 .header__session-links .header__profile-menu {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .header__session-links .header__profile-img {
   background-color: white;
@@ -124,6 +125,7 @@
     position: relative;
   }
   .header__session-links .header__profile .header__profile-img {
+    border: 2px solid white;
     width: 50px;
     height: 50px;
     margin-right: 1rem;
@@ -142,7 +144,9 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   .header__session-links .header__profile .header__profile-menu a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.5rem;
     text-decoration: none;
     color: white;
@@ -151,7 +155,7 @@
     background-color: #596161;
   }
   .header__session-links .header__profile:hover .header__profile-menu {
-    display: block;
+    display: flex;
   }
   .header__session-links a {
     color: white;
@@ -266,13 +270,15 @@
 
 main.user__profile {
   background-color: gray;
-  min-height: 80vh;
+  min-height: 70vh;
+  max-width: 1000px;
 }
 main.user__profile .profile__INB {
   padding-top: 20px;
   margin-left: 1rem;
 }
 main.user__profile .profile__INB .profile__image {
+  border: 2px solid white;
   background-color: white;
   width: 100px;
   height: 100px;
@@ -343,6 +349,10 @@ main.user__profile .profile__delete .profile__button {
   margin-top: 6rem;
 }
 
+#emailModal {
+  color: black;
+}
+
 .footer {
   height: 20vh;
   background-color: #050606;
@@ -407,6 +417,62 @@ main.user__profile .profile__delete .profile__button {
   width: 45px;
   height: auto;
   display: block;
+}
+
+.donation-popup {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.donation-popup__content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+.donation-popup__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #333;
+}
+.donation-popup__title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+.donation-popup__description {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+.donation-popup__details {
+  text-align: left;
+}
+.donation-popup__details-item {
+  font-size: 16px;
+  margin: 8px 0;
+  color: #333;
+}
+.donation-popup__details-item strong {
+  color: #0077cc;
+}
+.donation-popup__details-note {
+  font-size: 14px;
+  color: #999;
+  margin-top: 15px;
 }
 
 @media (min-width: 768px) {
@@ -528,19 +594,22 @@ main.user__profile .profile__delete .profile__button {
   height: 100%;
 }
 .game-main .game-main__scene .scene__background {
-  background-color: rgba(255, 0, 0, 0.5);
+  background-size: contain;
+  background-image: url("../../Assets/Background/Corridor-Straigth.webp");
   z-index: 1;
 }
 .game-main .game-main__scene .scene__filter {
-  background-color: rgba(0, 255, 0, 0.5);
+  background-size: contain;
+  background-image: url("../../Assets/Background/filter-light-wp.webp");
   z-index: 2;
 }
 .game-main .game-main__scene .scene__interface {
-  background-color: rgba(0, 0, 255, 0.5);
   z-index: 3;
 }
 .game-main .game-main__scene .scene__effects {
-  background-color: rgba(255, 255, 0, 0.5);
+  display: none;
+  background-size: contain;
+  background-color: rgba(255, 46, 39, 0.5);
   z-index: 4;
 }
 .game-main__menu {
