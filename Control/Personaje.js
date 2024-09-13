@@ -1,29 +1,29 @@
 // personaje.js
 class Personaje {
     constructor() {
-        this.subsuelo = 1;
+        this.subsuelo = 0;
         this.escenario = "Inicio";
         this.evento = "Neutro";
-        this.bifurcacion = " ";
-        this.obstaculo = " ";
         this.vida = 100;
+        this.stress = 0;
         this.escudo = false; // true si el personaje tiene un escudo
         this.botas = false; // true si el personaje tiene botas
+        this.torch = 10;
     }
 
     reiniciar() {
-        this.subsuelo = 1;
+        this.subsuelo = 0;
         this.escenario = "Inicio";
         this.evento = "Neutro";
-        this.bifurcacion = " ";
-        this.obstaculo = " ";
         this.vida = 100;
+        this.stress = 0;
         this.escudo = false;
         this.botas = false;
+        this.torch = 10;
     }
 
-    recibirDaño(cantidad) {
-        this.vida -= cantidad;
+    recibirDaño() {
+        this.vida -= 25;
     }
 
     obtenerEscudo() {
@@ -42,8 +42,8 @@ class Personaje {
         this.botas = false;
     }
 
-    aumentarVida(cantidad) {
-        this.vida = Math.min(this.vida + cantidad, 100); // la vida máxima es 100
+    aumentarVida() {
+        this.vida = Math.min(this.vida + 25, 100); // la vida máxima es 100
     }
 
     cambiarEscenario(nuevoEscenario) {
@@ -54,8 +54,12 @@ class Personaje {
         this.evento = nuevoEvento;
     }
 
-    cambiarSubsuelo(nuevoSubsuelo) {
-        this.subsuelo = nuevoSubsuelo;
+    SubirEscaleras() {
+        this.subsuelo++;
+    }
+
+    TrampaHueco() {
+        this.subsuelo--;
     }
 
     estaMuerto() {

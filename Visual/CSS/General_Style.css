@@ -269,7 +269,7 @@
 }
 
 main.user__profile {
-  background-color: gray;
+  background-color: #596161;
   min-height: 70vh;
   max-width: 1000px;
 }
@@ -278,8 +278,8 @@ main.user__profile .profile__INB {
   margin-left: 1rem;
 }
 main.user__profile .profile__INB .profile__image {
-  border: 2px solid white;
-  background-color: white;
+  border: 2px solid #fefefe;
+  background-color: #fefefe;
   width: 100px;
   height: 100px;
 }
@@ -291,13 +291,13 @@ main.user__profile .profile__INB .profile__info {
   margin-left: 1rem;
 }
 main.user__profile .profile__INB .profile__info h3 {
-  color: white;
+  color: #fefefe;
   width: 200px; /* Ancho fijo */
   font-size: 1.5rem; /* Ajusta el tamaño de la fuente en función del tamaño del viewport */
   max-width: 100%;
 }
 main.user__profile .profile__INB .profile__info #change-image {
-  background-color: aliceblue;
+  background-color: #fefefe;
   color: black;
   border: 1px solid black;
   padding: 2px;
@@ -306,7 +306,7 @@ main.user__profile .profile__mailinfo {
   margin-top: 2rem;
 }
 main.user__profile .profile__mailinfo h4 {
-  color: white;
+  color: #fefefe;
 }
 main.user__profile .profile__mailinfo div {
   display: flex;
@@ -318,10 +318,10 @@ main.user__profile .profile__mailinfo div {
 main.user__profile .profile__mailinfo div p {
   margin: 0;
   padding: 0;
-  color: white;
+  color: #fefefe;
 }
 main.user__profile .profile__mailinfo div #change-mail {
-  background-color: rgb(255, 255, 255);
+  background-color: #fefefe;
   color: black;
   border: 1px solid black;
   height: 30px;
@@ -333,10 +333,10 @@ main.user__profile .profile__gameinfo {
   margin-top: 2rem;
 }
 main.user__profile .profile__gameinfo h4 {
-  color: white;
+  color: #fefefe;
 }
 main.user__profile .profile__gameinfo p {
-  color: white;
+  color: #fefefe;
 }
 main.user__profile .profile__delete {
   width: 100%;
@@ -345,12 +345,56 @@ main.user__profile .profile__delete {
 }
 main.user__profile .profile__delete .profile__button {
   background-color: rgb(210, 25, 25);
-  color: white;
+  color: #fefefe;
   margin-top: 6rem;
 }
 
 #emailModal {
   color: black;
+}
+
+#confirmationDialog {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2e302f;
+  border: 1px solid #fefefe;
+  padding: 20px;
+  z-index: 1000;
+}
+#confirmationDialog p {
+  color: #fefefe;
+}
+#confirmationDialog div {
+  display: flex;
+  justify-content: space-around;
+}
+#confirmationDialog div button {
+  padding: 3px;
+  color: black;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+#confirmationDialog div #confirmYes {
+  background-color: #7c4a52;
+}
+#confirmationDialog div #confirmNo {
+  background-color: #4a6d7c;
+}
+
+#confirmationMessage {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fefefe;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 1000;
 }
 
 .footer {
@@ -622,8 +666,9 @@ main.user__profile .profile__delete .profile__button {
   background-color: #596161;
 }
 .game-main__menu button {
-  background-color: #7c4a52;
-  color: white;
+  background-color: #b7a57a;
+  color: black;
+  font-weight: bold;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;

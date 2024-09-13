@@ -2,26 +2,26 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchRankingData();
 });
 
-function fetchRankingData() {
-    fetch("../../Module/getRanking.php")
-        .then((response) => response.json())
-        .then((data) => {
-            if (Array.isArray(data) && data.length > 0) {
-                populateRankingTable(data);
-            } else {
-                console.error("No se recibieron datos válidos.");
-            }
-        })
-        .catch((error) => {
-            console.error("Error al obtener el ranking:", error);
-        });
+async function fetchRankingData() {
+    try {
+        const response = await fetch("../../Module/getRanking.php");
+        if (!response.ok)
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        const data = await response.json();
+        if (Array.isArray(data)) {
+            populateRankingTable(data);
+        } else {
+            console.error("No se recibieron datos válidos.");
+        }
+    } catch (error) {
+        console.error("Error al obtener el ranking:", error);
+    }
 }
 
 function populateRankingTable(data) {
     const tableBody = document.getElementById("ranking-table-body");
     tableBody.innerHTML = ""; // Limpia la tabla antes de llenarla
 
-    // Itera sobre los datos y crea filas de tabla
     data.forEach((player, index) => {
         const row = document.createElement("tr");
         row.className = "ranking__row";
@@ -34,7 +34,7 @@ function populateRankingTable(data) {
         tableBody.appendChild(row);
     });
 
-    // Si hay menos de 10 jugadores, completa con filas vacías
+    // Completar con filas vacías si hay menos de 10 jugadores
     for (let i = data.length; i < 10; i++) {
         const emptyRow = document.createElement("tr");
         emptyRow.className = "ranking__row";

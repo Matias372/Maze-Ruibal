@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Ranking of top players" />
         <title>Ranking</title>
         <link rel="stylesheet" href="../CSS/General_Style.css" />
     </head>
     <body>
         <div id="Header"></div>
-        <!-- Sección Header -->
+        <!-- Dynamic Header Loading -->
 
         <main class="ranking">
             <h1 class="ranking__title">Top 10 Players</h1>
             <table class="ranking__table">
                 <thead class="ranking__thead">
                     <tr>
-                        <th class="ranking__th">Posición</th>
-                        <th class="ranking__th">Usuario</th>
-                        <th class="ranking__th">Piso Alcanzado</th>
-                        <th class="ranking__th">Tiempo</th>
+                        <th class="ranking__th">Position</th>
+                        <th class="ranking__th">User</th>
+                        <th class="ranking__th">Floor Reached</th>
+                        <th class="ranking__th">Time</th>
                     </tr>
                 </thead>
                 <tbody id="ranking-table-body" class="ranking__tbody"></tbody>
@@ -27,7 +28,7 @@
         </main>
 
         <div id="Footer"></div>
-        <!-- Sección Footer -->
+        <!-- Dynamic Footer Loading -->
 
         <script src="../../Control/IncludeHeaderFooter.js"></script>
         <script src="../../Control/ranking.js"></script>

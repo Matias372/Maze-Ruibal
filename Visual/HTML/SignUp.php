@@ -1,9 +1,28 @@
+<?php
+session_start();
+
+// Generar un nuevo token CSRF si no existe uno en la sesión
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Register</title>
+        <!-- Modificar el Content Security Policy para permitir los recursos necesarios -->
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="
+        default-src 'self';
+        script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://stackpath.bootstrapcdn.com;
+        style-src 'self' https://fonts.googleapis.com https://stackpath.bootstrapcdn.com;
+        font-src https://fonts.gstatic.com;
+    "
+        />
         <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -18,7 +37,19 @@
 
         <main id="Main" class="signup-main container">
             <h1 class="signup-main__title">Sign Up</h1>
-            <form id="signupForm" class="signup-main__form">
+            <form
+                id="signupForm"
+                class="signup-main__form"
+                method="POST"
+                action="../../Module/Register.php"
+            >
+                <!-- Campo CSRF Token -->
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>"
+                />
+
                 <div class="form-group">
                     <label for="username" class="form-label">User:</label>
                     <input

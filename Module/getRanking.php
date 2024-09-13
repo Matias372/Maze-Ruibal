@@ -23,6 +23,7 @@ if ($result) {
             $ranking[] = $row;
         }
     }
+    // No se envía error si no hay resultados, se retorna un array vacío
 } else {
     // Manejo de errores en caso de que la consulta falle
     echo json_encode(["error" => "Error en la consulta: " . $conn->error]);

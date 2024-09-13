@@ -1,5 +1,5 @@
 main.user__profile {
-    background-color: gray;
+    background-color: $color-gris-medio;
     min-height: 70vh;
     max-width: 1000px;
 
@@ -8,8 +8,8 @@ main.user__profile {
         margin-left: 1rem;
 
         .profile__image {
-            border: 2px solid white;
-            background-color: white;
+            border: 2px solid $color-blanco;
+            background-color: $color-blanco;
             width: 100px;
             height: 100px;
         }
@@ -22,13 +22,13 @@ main.user__profile {
             margin-left: 1rem;
 
             h3 {
-                color: white;
+                color: $color-blanco;
                 width: 200px; /* Ancho fijo */
                 font-size: 1.5rem; /* Ajusta el tamaño de la fuente en función del tamaño del viewport */
                 max-width: 100%;
             }
             #change-image {
-                background-color: aliceblue;
+                background-color: $color-blanco;
                 color: black;
                 border: 1px solid black;
                 padding: 2px;
@@ -40,7 +40,7 @@ main.user__profile {
         margin-top: 2rem;
 
         h4 {
-            color: white;
+            color: $color-blanco;
         }
         div {
             display: flex;
@@ -51,10 +51,10 @@ main.user__profile {
             p {
                 margin: 0;
                 padding: 0;
-                color: white;
+                color: $color-blanco;
             }
             #change-mail {
-                background-color: rgb(255, 255, 255);
+                background-color: $color-blanco;
                 color: black;
                 border: 1px solid black;
                 height: 30px;
@@ -68,10 +68,10 @@ main.user__profile {
     .profile__gameinfo {
         margin-top: 2rem;
         h4 {
-            color: white;
+            color: $color-blanco;
         }
         p {
-            color: white;
+            color: $color-blanco;
         }
     }
 
@@ -81,7 +81,7 @@ main.user__profile {
         justify-content: center;
         .profile__button {
             background-color: rgb(210, 25, 25);
-            color: white;
+            color: $color-blanco;
             margin-top: 6rem;
         }
     }
@@ -89,4 +89,51 @@ main.user__profile {
 
 #emailModal {
     color: black;
+}
+
+#confirmationDialog {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $color-gris-oscuro;
+    border: 1px solid $color-blanco;
+    padding: 20px;
+    z-index: 1000;
+
+    p {
+        color: $color-blanco;
+    }
+    div {
+        display: flex;
+        justify-content: space-around;
+        button {
+            padding: 3px;
+            color: black;
+            padding-right: 1rem;
+            padding-left: 1rem;
+        }
+
+        #confirmYes {
+            background-color: $color-rojo-oscuro-marron;
+        }
+
+        #confirmNo {
+            background-color: $color-azul-oscuro-apagado;
+        }
+    }
+}
+
+#confirmationMessage {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $color-blanco;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
 }

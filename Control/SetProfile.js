@@ -91,74 +91,137 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Manejar el clic en el botón "Change Email" dentro del modal
     document.querySelector("#submitEmail").addEventListener("click", () => {
-        const newEmail = document.querySelector("#newEmail").value;
+        const newEmail = document.querySelector("#newEmail").value.trim();
+
         if (newEmail) {
             const formData = new FormData();
             formData.append("newEmail", newEmail);
 
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "../../Module/UpdateEmail.php", true);
+
             xhr.onload = function () {
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    if (response.success) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const response = xhr.responseText;
+                    if (response.includes("successfully")) {
                         document.querySelector("#mail").textContent = newEmail;
-                        $("#emailModal").modal("hide"); // Oculta el modal
-                        alert("Email updated successfully!");
+                        console.log(response); // Mensaje de éxito a la consola
                     } else {
-                        alert(
-                            "Error: " +
-                                (response.message || "Failed to update email")
-                        );
+                        console.error("Error: " + response); // Error registrado en la consola
                     }
-                } catch (e) {
-                    console.error("Error parsing JSON response", e);
-                    alert("An unexpected error occurred.");
+                } else {
+                    console.error("HTTP error:", xhr.status, xhr.statusText); // Error HTTP registrado en la consola
                 }
             };
 
             xhr.onerror = function () {
-                console.error("Network error:", xhr.statusText);
-                alert("An error occurred while updating the email.");
+                console.error("Network error:", xhr.statusText); // Error de red registrado en la consola
             };
+
             xhr.send(formData);
+        } else {
+            console.warn("Please enter a valid email address."); // Mensaje de advertencia si el email es inválido
         }
     });
 
     // Manejar el clic en el botón "Delete Account"
+    // Mostrar el div de confirmación
+    function showConfirmationDialog(message, onConfirm) {
+        const dialog = document.getElementById("confirmationDialog");
+        const messageText = document.getElementById("confirmationMessageText");
+        const yesButton = document.getElementById("confirmYes");
+        const noButton = document.getElementById("confirmNo");
+
+        messageText.textContent = message;
+        dialog.style.display = "flex";
+
+        yesButton.onclick = function () {
+            dialog.style.display = "none";
+            if (typeof onConfirm === "function") {
+                onConfirm();
+            }
+        };
+
+        noButton.onclick = function () {
+            dialog.style.display = "none";
+        };
+    }
+
+    // Manejo del botón de eliminar cuenta
     document
         .querySelector(".profile__delete .btn-danger")
         .addEventListener("click", () => {
-            if (
-                confirm(
-                    "Are you sure you want to delete your account? This action cannot be undone."
-                )
-            ) {
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "../../Module/DeleteAccount.php", true);
-                xhr.onload = function () {
-                    try {
-                        const response = JSON.parse(xhr.responseText);
-                        if (response.success) {
-                            alert("Account deleted successfully!");
-                            window.location.href = "LogIn.html"; // Redirigir a la página de inicio de sesión
-                        } else {
-                            alert(
-                                "Error: " +
-                                    (response.message ||
-                                        "Failed to delete account")
+            showConfirmationDialog(
+                "Are you sure you want to delete your account? This action cannot be undone.",
+                function () {
+                    // Código para eliminar la cuenta
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "../../Module/DeleteAccount.php", true);
+                    xhr.onload = function () {
+                        try {
+                            const response = JSON.parse(xhr.responseText);
+                            if (response.success) {
+                                // Llamar al script de logout.php para cerrar la sesión
+                                const logoutXhr = new XMLHttpRequest();
+                                logoutXhr.open(
+                                    "POST",
+                                    "../../Module/logout.php",
+                                    true
+                                );
+                                logoutXhr.onload = function () {
+                                    if (
+                                        logoutXhr.status >= 200 &&
+                                        logoutXhr.status < 300
+                                    ) {
+                                        showConfirmationMessage(
+                                            "Account deleted successfully!",
+                                            "success"
+                                        );
+                                        setTimeout(() => {
+                                            window.location.href = "LogIn.html"; // Redirigir a la página de inicio de sesión
+                                        }, 2000); // Esperar 2 segundos antes de redirigir
+                                    } else {
+                                        showConfirmationMessage(
+                                            "An error occurred during logout.",
+                                            "error"
+                                        );
+                                    }
+                                };
+                                logoutXhr.onerror = function () {
+                                    showConfirmationMessage(
+                                        "An error occurred while logging out.",
+                                        "error"
+                                    );
+                                };
+                                logoutXhr.send();
+                            } else {
+                                showConfirmationMessage(
+                                    "Failed to delete account",
+                                    "error"
+                                );
+                            }
+                        } catch (e) {
+                            showConfirmationMessage(
+                                "An unexpected error occurred.",
+                                "error"
                             );
                         }
-                    } catch (e) {
-                        console.error("Error parsing JSON response", e);
-                        alert("An unexpected error occurred.");
-                    }
-                };
-                xhr.onerror = function () {
-                    console.error("Network error:", xhr.statusText);
-                    alert("An error occurred while deleting the account.");
-                };
-                xhr.send();
-            }
+                    };
+                    xhr.onerror = function () {
+                        showConfirmationMessage(
+                            "An error occurred while deleting the account.",
+                            "error"
+                        );
+                    };
+                    xhr.send();
+                }
+            );
         });
+
+    function showConfirmationMessage(message, type) {
+        const confirmationDiv = document.getElementById("confirmationMessage");
+        confirmationDiv.textContent = message;
+        confirmationDiv.style.display = "block";
+        confirmationDiv.style.color = type === "success" ? "green" : "red";
+    }
 });

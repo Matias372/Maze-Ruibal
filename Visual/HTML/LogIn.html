@@ -9,7 +9,6 @@
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         />
         <link rel="stylesheet" href="../CSS/General_Style.css" />
-        <script src="../../Control/login.js" defer></script>
     </head>
     <body>
         <div id="Header">
@@ -44,6 +43,10 @@
                 <button type="submit" class="btn btn-primary">Log In</button>
             </form>
             <a href="SignUp.html">No account? Sign Up</a>
+
+            <!-- Mensaje de error/success y spinner -->
+            <div id="messageBox" class="message-box"></div>
+            <div id="spinner" class="spinner"></div>
         </main>
 
         <div id="Footer">
@@ -53,7 +56,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <!-- Script para incluir Header y Footer -->
+        <script src="../../Control/login.js"></script>
         <script src="../../Control/IncludeHeaderFooter.js"></script>
     </body>
 </html>
