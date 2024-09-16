@@ -19,7 +19,8 @@
         .scene__background,
         .scene__filter,
         .scene__interface,
-        .scene__effects {
+        .scene__effects,
+        .scene__damage-effects {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -39,18 +40,84 @@
 
         .scene__interface {
             z-index: 3; // Encima del filtro
+
+            .interface__player-stats {
+                gap: 10px;
+                width: 100%;
+                height: 100%;
+                padding: 5px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                img {
+                    width: 20px;
+                }
+                p {
+                    font-family: $homefont;
+                    font-weight: bold;
+                }
+                .player-stats__health-Floor,
+                .player-stats__brain-items,
+                .player-stats__torch {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                }
+                .player-stats__torch {
+                    width: 100%;
+                    justify-content: space-around;
+                    position: absolute;
+                    bottom: 5px;
+                }
+            }
+        }
+        .scene__effects {
+            background-color: black;
+            opacity: 0;
+            transition: opacity 1s ease; /* Transición de desvanecimiento */
+            display: none; /* Inicialmente oculto */
+            z-index: 5;
         }
 
-        .scene__effects {
+        /* Estilo cuando se muestra */
+        .scene__effects.visible {
+            display: block; /* Mostrar el elemento */
+            opacity: 1; /* Totalmente opaco */
+        }
+        .scene__damage-effects {
+            z-index: 4;
             display: none;
-            background-size: contain;
-            background-color: rgba(
-                255,
-                46,
-                39,
-                0.5
-            ); // Amarillo con 50% de opacidad
-            z-index: 4; // Encima de la interfaz
+            background-color: rgba(255, 33, 33, 0.733);
+        }
+        .scene__damage-effects.visible {
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            .interface__player-stats {
+                background-color: $color-gris-medio;
+                border: 2px solid white;
+                gap: 10px;
+                width: 250px !important;
+                height: 100px !important;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                img {
+                    width: 20px;
+                }
+                .player-stats__health-Floor,
+                .player-stats__brain-items,
+                .player-stats__torch {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                }
+                .player-stats__torch {
+                    position: static !important;
+                }
+            }
         }
     }
 
@@ -90,7 +157,8 @@
             color: #fefefe;
             font-size: 0.7rem;
             text-align: start;
-            padding: 20px;
+            padding: 15px;
+            line-height: 15px;
         }
     }
 }

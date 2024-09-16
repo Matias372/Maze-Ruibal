@@ -167,3 +167,63 @@ Header y Footer:
 Fondo: #2E302F (Gris oscuro) para mantener uniformidad en todas las páginas.
 Texto y enlaces: #FEFEFE (Blanco) para asegurar la legibilidad.
 Botones o íconos: #4A6D7C (Azul oscuro apagado) o #B7A57A (Oro envejecido) para elementos interactivos.
+
+
+=========================================================================
+Escenarios Neutros:
+
+Corridor-Straigth: "Te encuentras en un largo y recto corredor. Las paredes son de piedra fría y el suelo está cubierto de polvo. No hay nada más a la vista, solo el eco de tus pasos."
+
+Corridor-3Ways: "El corredor se bifurca en tres direcciones. Puedes ir hacia la izquierda, derecha o seguir recto. La elección es tuya."
+
+Corridor-LF: "Un pasillo angosto se extiende hacia adelante y a la izquierda. Los muros están cubiertos de musgo y parece haber humedad en el aire."
+
+Corridor-RF: "El corredor se abre en una bifurcación a la derecha y hacia adelante. La luz de tu antorcha revela marcas extrañas en las paredes."
+
+Corridor-RL: "El camino se divide en dos: hacia la derecha y hacia la izquierda. Una leve brisa sopla, trayendo consigo un susurro inquietante."
+
+Corridor-DeadEnd: "Has llegado a un callejón sin salida. Solo puedes retroceder."
+
+Escenarios Positivos:
+
+Corridor-Stairs: "Te encuentras frente a una escalera hacia el piso superior. La estructura parece sólida y bien conservada. Quizás te lleve a un nivel más seguro."
+
+Corridor-Fountain: "Una fuente de agua cristalina está en el centro del corredor. El agua parece fresca y revitalizante. Tal vez puedas beber un sorbo para recuperar fuerzas."
+
+Corridor-Fountain (w/ torch): "Una fuente de agua cristalina está en el centro del corredor. tirado a un costado encuentras una antorcha"
+
+Corridor-Chest: "Un antiguo cofre descansa en un rincón del corredor. Parece estar intacto y parece prometer tesoros ocultos en su interior."
+
+
+Escenarios Negativos:
+
+Corridor-Trap: "Un mecanismo oculto se activa al pisar una losa en el suelo. Unas afiladas trampas emergen del piso. Deberás tener cuidado para evitar daño."
+
+Corridor-TrapHole: "Un hueco en el suelo aparece de repente bajo tus pies. Es profundo y oscuro, y parece que ha sido diseñado para atrapar a los incautos."
+
+Corridor-Monster: "Una aterradora criatura aparece frente a ti. Te ataca pero logras alejarte de ella después de recibir algo de daño"
+
+Textos para Acciones
+
+Acción en el Escenario "Corridor-Fountain":
+
+Drink: "Te agachas para beber del agua fresca de la fuente. El líquido revitaliza tu cuerpo y te hace sentir renovado. Has recuperado parte de tu vida."
+
+Acción en el Escenario "Corridor-Chest":
+
+Open Chest (botas): "Abres el cofre con cuidado. Dentro encuentras un objeto sorprendente. obtienes un par de botas usadas"
+
+Open Chest (escudo): "Abres el cofre con cuidado. Dentro encuentras un objeto sorprendente. Obtienes un escudo de madera, es mejor que nada"
+
+Open Chest (torch): "Abres el cofre con cuidado. Dentro encuentras un objeto sorprendente. obtienes una antorcha."
+
+Open Chest (trap): "Abres el cofre con cuidado. resulto ser una trampa, recibes daño"
+
+Acción en el Escenario "Corridor-Trap":
+
+Avoid Trap: "Usas tus reflejos para evitar las trampas pero se dañaron las botas por la trampa, debes tener cuidado de ahora en mas"
+
+
+Acción en el Escenario "Corridor-Monster":
+
+Fight Monster: "Una aterradora criatura aparece frente a ti. Te ataca pero logras alejarte de ella después de bloquear el golpe con el escudo. el escudo se atasco en los dientes de la criatura asi que lo sueltas y corres"

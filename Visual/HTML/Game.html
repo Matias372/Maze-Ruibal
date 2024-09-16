@@ -20,75 +20,184 @@
                 <div class="scene__filter"></div>
                 <div class="scene__interface">
                     <div class="interface__player-stats">
-                        <div class="player-stats__container">
-                            <p class="player-stats__item">
-                                Vida: <span id="player-health">100</span>
-                            </p>
-                            <p class="player-stats__item">
-                                Calma: <span id="player-calm">100</span>
-                            </p>
+                        <div class="player-stats__health-Floor">
+                            <div class="player-stats__health">
+                                <img
+                                    src="../../Assets/Items/heart.png"
+                                    alt="vida de personaje"
+                                    id="player-health-1"
+                                />
+                                <img
+                                    src="../../Assets/Items/heart.png"
+                                    alt="vida de personaje"
+                                    id="player-health-2"
+                                />
+                                <img
+                                    src="../../Assets/Items/heart.png"
+                                    alt="vida de personaje"
+                                    id="player-health-3"
+                                />
+                                <img
+                                    src="../../Assets/Items/heart.png"
+                                    alt="vida de personaje"
+                                    id="player-health-4"
+                                />
+                            </div>
+
+                            <p>Floor: <span id="player-floor">0</span></p>
                         </div>
-                        <p class="player-stats__item">
-                            Piso: <span id="player-floor">0</span>
-                        </p>
-                        <p class="player-stats__item">
-                            Botas: <span id="player-boots">No</span>
-                        </p>
-                        <p class="player-stats__item">
-                            Escudo: <span id="player-shield">No</span>
-                        </p>
-                        <p class="player-stats__item">
-                            Antorcha: <span id="player-torch">10</span> turnos
-                            restantes
-                        </p>
+                        <div class="player-stats__brain-items">
+                            <div class="player-stats__brain">
+                                <img
+                                    src="../../Assets/Items/brain.png"
+                                    alt="vida de personaje"
+                                    id="player-brain-1"
+                                />
+                                <img
+                                    src="../../Assets/Items/brain.png"
+                                    alt="vida de personaje"
+                                    id="player-brain-2"
+                                />
+                                <img
+                                    src="../../Assets/Items/brain.png"
+                                    alt="vida de personaje"
+                                    id="player-brain-3"
+                                />
+                                <img
+                                    src="../../Assets/Items/brain.png"
+                                    alt="vida de personaje"
+                                    id="player-brain-4"
+                                />
+                            </div>
+                            <div class="player-stats__items">
+                                <img
+                                    src="../../Assets/Items/Boots.webp"
+                                    alt="vida de personaje"
+                                    id="player-boots"
+                                />
+                                <img
+                                    src="../../Assets/Items/Shield.webp"
+                                    alt="vida de personaje"
+                                    id="player-shield"
+                                />
+                            </div>
+                        </div>
+                        <div class="player-stats__torch">
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-1"
+                            />
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-2"
+                            />
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-3"
+                            />
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-4"
+                            />
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-5"
+                            />
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-6"
+                            />
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-7"
+                            />
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-8"
+                            />
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-9"
+                            />
+                            <img
+                                src="../../Assets/Items/Torch.webp"
+                                alt="vida de personaje"
+                                id="player-torch-10"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="scene__effects"></div>
+                <div class="scene__damage-effects"></div>
             </section>
 
             <!-- Sección del Menú de Opciones -->
             <section class="game-main__menu" id="options-container">
-                <!-- Todos los botones posibles, algunos inicialmente ocultos -->
                 <button
                     class="menu__option options-Izquierda"
+                    id="btn-izquierda"
                     style="display: none"
                 >
-                    Izquierda
+                    Left
                 </button>
                 <button
                     class="menu__option options-Frente"
+                    id="btn-frente"
                     style="display: none"
                 >
-                    Frente
+                    Forward
                 </button>
                 <button
                     class="menu__option options-Derecha"
+                    id="btn-derecha"
                     style="display: none"
                 >
-                    Derecha
+                    Right
                 </button>
                 <button
                     class="menu__option options-Volver"
+                    id="btn-volver"
                     style="display: none"
                 >
-                    Volver
+                    Go Back
                 </button>
-                <button class="menu__option options-Usar" style="display: none">
+                <button
+                    class="menu__use options-Usar"
+                    id="btn-usar"
+                    style="display: none"
+                >
                     Usar
                 </button>
-                <button class="menu__option options-Explorar">Explorar</button>
+                <button
+                    id="boton-explorar"
+                    class="menu__option options-Explorar"
+                >
+                    Explore
+                </button>
                 <button
                     class="menu__option options-Continuar"
+                    id="btn-continuar"
                     style="display: none"
                 >
-                    Continuar
+                    Continue
                 </button>
             </section>
 
             <!-- Sección de Texto -->
             <section class="game-main__text">
                 <p class="text__description" id="scene-description">
-                    Bienvenido al juego, selecciona una dirección para comenzar.
+                    You’ve just woken up in a dark hallway with no memory of how
+                    you got here. There’s a torch lying beside you. You light it
+                    to start exploring and find a way out.
                 </p>
             </section>
         </main>

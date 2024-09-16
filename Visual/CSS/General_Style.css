@@ -628,11 +628,13 @@ main.user__profile .profile__delete .profile__button {
   background-position: center;
   position: relative;
   overflow: hidden;
+  /* Estilo cuando se muestra */
 }
 .game-main .game-main__scene .scene__background,
 .game-main .game-main__scene .scene__filter,
 .game-main .game-main__scene .scene__interface,
-.game-main .game-main__scene .scene__effects {
+.game-main .game-main__scene .scene__effects,
+.game-main .game-main__scene .scene__damage-effects {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -650,11 +652,79 @@ main.user__profile .profile__delete .profile__button {
 .game-main .game-main__scene .scene__interface {
   z-index: 3;
 }
+.game-main .game-main__scene .scene__interface .interface__player-stats {
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.game-main .game-main__scene .scene__interface .interface__player-stats img {
+  width: 20px;
+}
+.game-main .game-main__scene .scene__interface .interface__player-stats p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+.game-main .game-main__scene .scene__interface .interface__player-stats .player-stats__health-Floor,
+.game-main .game-main__scene .scene__interface .interface__player-stats .player-stats__brain-items,
+.game-main .game-main__scene .scene__interface .interface__player-stats .player-stats__torch {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.game-main .game-main__scene .scene__interface .interface__player-stats .player-stats__torch {
+  width: 100%;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 5px;
+}
 .game-main .game-main__scene .scene__effects {
-  display: none;
-  background-size: contain;
-  background-color: rgba(255, 46, 39, 0.5);
+  background-color: black;
+  opacity: 0;
+  transition: opacity 1s ease; /* Transición de desvanecimiento */
+  display: none; /* Inicialmente oculto */
+  z-index: 5;
+}
+.game-main .game-main__scene .scene__effects.visible {
+  display: block; /* Mostrar el elemento */
+  opacity: 1; /* Totalmente opaco */
+}
+.game-main .game-main__scene .scene__damage-effects {
   z-index: 4;
+  display: none;
+  background-color: rgba(255, 33, 33, 0.733);
+}
+.game-main .game-main__scene .scene__damage-effects.visible {
+  display: block;
+}
+@media (min-width: 768px) {
+  .game-main .game-main__scene .interface__player-stats {
+    background-color: #596161;
+    border: 2px solid white;
+    gap: 10px;
+    width: 250px !important;
+    height: 100px !important;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .game-main .game-main__scene .interface__player-stats img {
+    width: 20px;
+  }
+  .game-main .game-main__scene .interface__player-stats .player-stats__health-Floor,
+  .game-main .game-main__scene .interface__player-stats .player-stats__brain-items,
+  .game-main .game-main__scene .interface__player-stats .player-stats__torch {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .game-main .game-main__scene .interface__player-stats .player-stats__torch {
+    position: static !important;
+  }
 }
 .game-main__menu {
   width: 100%;
@@ -691,7 +761,8 @@ main.user__profile .profile__delete .profile__button {
   color: #fefefe;
   font-size: 0.7rem;
   text-align: start;
-  padding: 20px;
+  padding: 15px;
+  line-height: 15px;
 }
 
 body {
