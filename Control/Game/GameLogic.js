@@ -32,6 +32,16 @@ precargarImagenes();
 import { abrirCofre } from "./GameChest.js";
 
 // =========================
+// 1-5. Cargar el Timer
+// =========================
+import { startTimer, stopTimer, checkCharacterLife } from "./ExploreTimer.js";
+
+// =========================
+// 1-6. Cargar la Muerte
+// =========================
+import { mostrarMensajeMuerte } from "./DeathMessage.js";
+
+// =========================
 // 2. Función para actualizar el DOM
 // =========================
 import { actualizarDOM } from "./DOMUtils.js";
@@ -39,23 +49,28 @@ import { actualizarDOM } from "./DOMUtils.js";
 // =========================
 // 2-1. Cargar los Datos del Personaje
 // =========================
-fetch("../../Control/JSON/Personaje.json")
-    .then((response) => response.json())
-    .then((personaje) => {
-        subsuelo = personaje.subsuelo;
-        escenario = personaje.escenario;
-        evento = personaje.evento;
-        vida = Math.min(personaje.vida, MAX_VIDA);
-        stress = Math.min(personaje.stress, MAX_STRESS);
-        escudo = personaje.escudo;
-        botas = personaje.botas;
-        torch = Math.min(personaje.torch, MAX_TORCH);
+function cargarDatosPersonaje() {
+    fetch("../../Control/JSON/Personaje.json")
+        .then((response) => response.json())
+        .then((personaje) => {
+            subsuelo = personaje.subsuelo;
+            escenario = personaje.escenario;
+            evento = personaje.evento;
+            vida = Math.min(personaje.vida, MAX_VIDA);
+            stress = Math.min(personaje.stress, MAX_STRESS);
+            escudo = personaje.escudo;
+            botas = personaje.botas;
+            torch = Math.min(personaje.torch, MAX_TORCH);
 
-        actualizarDOM(subsuelo, vida, stress, escudo, botas, torch);
-    })
-    .catch((error) =>
-        console.error("Error al cargar los datos del personaje:", error)
-    );
+            actualizarDOM(subsuelo, vida, stress, escudo, botas, torch);
+        })
+        .catch((error) =>
+            console.error("Error al cargar los datos del personaje:", error)
+        );
+}
+
+// Llama a la función cuando necesites cargar los datos
+cargarDatosPersonaje();
 
 // =========================
 // 3. Función para generar el tipo de evento
@@ -123,6 +138,18 @@ function cambiarEscenario(tipo, nuevoEscenario) {
         // Llamada a la función para rellenar la descripción
         actualizarDescripcion(nuevoEscenario, botas, escudo, lastFountainFloor);
         mostrarOpciones(tipo, nuevoEscenario);
+
+        if (nuevoEscenario === "StartingRoom") {
+            // Recargar los datos del personaje
+            cargarDatosPersonaje();
+            actualizarDOM(subsuelo, vida, stress, escudo, botas, torch);
+        }
+        if (vida <= 0) {
+            const tiempo = checkCharacterLife(vida);
+            mostrarMensajeMuerte(subsuelo, tiempo);
+            mostrarOpciones("Neutro", "DeadScene");
+            return; // Detener la ejecución si el personaje ha muerto
+        }
     }, 1000);
 }
 
@@ -134,7 +161,19 @@ import { VerificPanic } from "./VerificPanic.js";
 // 7. Manejar el clic en el botón para cambiar escenario
 // =========================
 function manejarClicBoton(event) {
-    if (event.target && event.target.matches("button.menu__option")) {
+    // Verifica si el target es un elemento HTML antes de intentar acceder a su estilo
+    const target = event.target;
+
+    if (
+        target.matches("#boton-explorar") &&
+        target instanceof HTMLElement &&
+        getComputedStyle(target).display !== "none"
+    ) {
+        stopTimer(); // Detener el cronómetro al explorar
+        startTimer(); // Iniciar el cronómetro al explorar
+    }
+
+    if (target && target.matches("button.menu__option")) {
         lastEvent = evento;
         lastScenario = escenario;
 
@@ -156,12 +195,14 @@ function manejarClicBoton(event) {
             "Corridor-Fountain (w/ torch)",
         ];
 
-        //evita excenarios restringidos
+        // Evita escenarios restringidos
         while (
             (restrictedScenarios.includes(lastScenario) &&
                 escenario === lastScenario) ||
             (escenario === "Corridor-TrapHole" && subsuelo === 0) ||
-            escenario === "Corridor-Fountain (panic)"
+            escenario === "Corridor-Fountain (panic)" ||
+            escenario === "StartingRoom" ||
+            escenario === "DeadScene"
         ) {
             evento = generarEvento();
             escenario = seleccionarEscenario(evento);
@@ -195,6 +236,16 @@ function manejarClicBoton(event) {
             }
         } else {
             cambiarEscenario(evento, escenario); // Cambia el escenario si el estrés es 100 o más
+        }
+
+        // Verificar si se reinicia el juego
+        if (
+            target.matches("#btn-restart") &&
+            vida === 0 &&
+            target instanceof HTMLElement &&
+            getComputedStyle(target).display !== "none"
+        ) {
+            location.reload(); // Recargar la página
         }
     }
 }

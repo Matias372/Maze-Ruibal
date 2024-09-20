@@ -1,6 +1,6 @@
 {
     "subsuelo": 0,
-    "escenario": "Inicio",
+    "escenario": "StartingRoom",
     "evento": "Neutro",
     "vida": 100,
     "stress": 100,

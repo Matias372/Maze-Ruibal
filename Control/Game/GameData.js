@@ -148,6 +148,22 @@ export const gameData = {
                     "You've reached a dead end. You have no choice but to go back.",
                 options: [{ text: "Go back", clase: "options-Volver" }],
             },
+
+            {
+                id: 1,
+                name: "StartingRoom",
+                description:
+                    "You’ve just woken up in a dark hallway with no memory of how you got here. There’s a torch lying beside you. You light it to start exploring and find a way out.",
+                options: [{ text: "Explore", clase: "options-Explorar" }],
+            },
+
+            {
+                id: 7,
+                name: "DeadScene",
+                description:
+                    "In a moment of distraction, you were led astray by the darkness. Your efforts to survive have come to an end. Remember, every exploration is a lesson, and this labyrinth does not forgive.",
+                options: [{ text: "Restart", clase: "options-restart" }],
+            },
         ],
         Negativo: [
             {

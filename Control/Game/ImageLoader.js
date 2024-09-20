@@ -3,6 +3,10 @@
 // Datos de imágenes para precargar
 const imagenes = [
     {
+        id: "StartingRoom",
+        src: "../../Assets/Background/Corridor-Straigth.webp",
+    },
+    {
         id: "Corridor-Straigth",
         src: "../../Assets/Background/Corridor-Straigth.webp",
     },

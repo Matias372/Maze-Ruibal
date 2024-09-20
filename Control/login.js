@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value;
 
+        console.log("Correo electrónico enviado:", email);
+
         if (!validateForm(email, password)) return;
 
         spinner.style.display = "block";

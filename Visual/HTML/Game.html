@@ -15,7 +15,7 @@
         <!-- Sección del Juego -->
         <main class="game-main" id="game-main">
             <!-- Sección del Escenario -->
-            <section class="game-main__scene">
+            <section class="game-main__scene" id="game-scene">
                 <div class="scene__background"></div>
                 <div class="scene__filter"></div>
                 <div class="scene__interface">
@@ -138,6 +138,11 @@
                 </div>
                 <div class="scene__effects"></div>
                 <div class="scene__damage-effects"></div>
+                <div
+                    id="death-message"
+                    class="death-message"
+                    style="display: none"
+                ></div>
             </section>
 
             <!-- Sección del Menú de Opciones -->
@@ -180,6 +185,7 @@
                 <button
                     id="boton-explorar"
                     class="menu__option options-Explorar"
+                    style="display: inline-block"
                 >
                     Explore
                 </button>
@@ -189,6 +195,13 @@
                     style="display: none"
                 >
                     Continue
+                </button>
+                <button
+                    class="menu__option options-restart"
+                    id="btn-restart"
+                    style="display: none"
+                >
+                    Restart
                 </button>
             </section>
 

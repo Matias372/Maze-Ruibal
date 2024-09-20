@@ -62,8 +62,9 @@ function mostrarOpciones(tipo, nuevoEscenario) {
     const botonDerecha = document.querySelector(".options-Derecha");
     const botonVolver = document.querySelector(".options-Volver");
     const botonUsar = document.querySelector(".options-Usar");
-    const botonExplorar = document.getElementById("boton-explorar");
+    const botonExplorar = document.querySelector(".options-Explorar");
     const botonContinuar = document.querySelector(".options-Continuar");
+    const botonrestart = document.querySelector(".options-restart");
 
     // Ocultar todos los botones antes de mostrar las opciones relevantes
     [
@@ -74,6 +75,7 @@ function mostrarOpciones(tipo, nuevoEscenario) {
         botonUsar,
         botonExplorar,
         botonContinuar,
+        botonrestart,
     ].forEach((boton) => {
         boton.style.display = "none";
     });
@@ -149,6 +151,12 @@ function mostrarOpciones(tipo, nuevoEscenario) {
             case "Corridor-Monster":
             case "Corridor-TrapHole":
                 botonContinuar.style.display = "inline-block"; // "Continuar" stays "Continue"
+                break;
+            case "StartingRoom":
+                botonExplorar.style.display = "inline-block";
+                break;
+            case "DeadScene":
+                botonrestart.style.display = "inline-block";
                 break;
             default:
                 console.error("Unknown scenario:", nuevoEscenario);
