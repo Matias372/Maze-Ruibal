@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const headerFile = "../../Visual/Html/Header.html";
-    const footerFile = "../../Visual/Html/Footer.html";
+    const headerFile = "../../Visual/HTML/Header.html";
+    const footerFile = "../../Visual/HTML/Footer.html";
     const checkSessionUrl = "../../Module/check_session.php";
 
     async function loadHTML(file, elementId) {

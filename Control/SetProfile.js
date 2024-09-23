@@ -106,6 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (response.includes("successfully")) {
                         document.querySelector("#mail").textContent = newEmail;
                         console.log(response); // Mensaje de éxito a la consola
+                        alert("Email updated successfully!"); // Mensaje de éxito
+                        $("#emailModal").modal("hide");
                     } else {
                         console.error("Error: " + response); // Error registrado en la consola
                     }
@@ -178,7 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                             "success"
                                         );
                                         setTimeout(() => {
-                                            window.location.href = "LogIn.html"; // Redirigir a la página de inicio de sesión
+                                            window.location.href =
+                                                "SignIn.html"; // Redirigir a la página de inicio de sesión
                                         }, 2000); // Esperar 2 segundos antes de redirigir
                                     } else {
                                         showConfirmationMessage(

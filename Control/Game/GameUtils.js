@@ -1,12 +1,24 @@
 // Función auxiliar para aplicar daño
 export function aplicarDaño(escenario, vida, escudo, botas) {
     const DamageEffects = document.querySelector(".scene__damage-effects");
+    const sceneBackground = document.querySelector(".scene__background"); // Selecciona el div de fondo
     let mensaje = "";
 
     if (escenario === "Corridor-Trap") {
         if (!botas) {
             vida = Math.max(vida - 25, 0);
             DamageEffects.classList.add("visible");
+
+            // Añadir clase de animación de sacudida
+            sceneBackground.classList.add(
+                "animate__animated",
+                "animate__shakeX"
+            );
+            setTimeout(
+                () => sceneBackground.classList.remove("animate__shakeX"),
+                500
+            ); // Remover la animación después de 500ms
+
             setTimeout(() => DamageEffects.classList.remove("visible"), 500);
         } else {
             botas = false;
@@ -18,6 +30,17 @@ export function aplicarDaño(escenario, vida, escudo, botas) {
         if (!escudo) {
             vida = Math.max(vida - 25, 0);
             DamageEffects.classList.add("visible");
+
+            // Añadir clase de animación de sacudida
+            sceneBackground.classList.add(
+                "animate__animated",
+                "animate__shakeX"
+            );
+            setTimeout(
+                () => sceneBackground.classList.remove("animate__shakeX"),
+                500
+            ); // Remover la animación después de 500ms
+
             setTimeout(() => DamageEffects.classList.remove("visible"), 500);
         } else {
             escudo = false;

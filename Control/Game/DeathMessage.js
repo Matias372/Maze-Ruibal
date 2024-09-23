@@ -12,7 +12,6 @@ function formatTime(seconds) {
 }
 
 // Función para mostrar el mensaje de muerte
-// Función para mostrar el mensaje de muerte
 async function mostrarMensajeMuerte(piso, tiempo) {
     const deathMessageDiv = document.getElementById("death-message");
 
@@ -34,10 +33,45 @@ async function mostrarMensajeMuerte(piso, tiempo) {
 }
 
 // Función para enviar datos al servidor
-async function enviarDatosMuerte(piso, tiempo) {
+async function enviarDatosMuerte(piso, tiempoEnSegundos) {
+    const formattedTime = formatTime(tiempoEnSegundos);
+
+    try {
+        // Primero, obtén el ranking actual desde el servidor
+        const responseRanking = await fetch("../../Module/get_ranking.php");
+        const ranking = await responseRanking.json(); // Supongamos que recibes un arreglo de objetos
+
+        // Buscar el registro correspondiente al piso actual
+        const currentRecord = ranking.find(
+            (record) => record.floor === piso
+        ) || { floor: 0, time: "00:00:00" };
+
+        // Verifica si es un nuevo récord
+        if (currentRecord.floor === 0 && currentRecord.time === "00:00:00") {
+            // Guarda directamente si el piso es 0 y el tiempo es "00:00:00"
+            await guardarDatos(piso, formattedTime);
+        } else {
+            const newFloor = piso;
+            const currentFloor = currentRecord.floor;
+            const currentTimeInSeconds = timeToSeconds(currentRecord.time);
+
+            if (
+                newFloor > currentFloor ||
+                (newFloor === currentFloor &&
+                    tiempoEnSegundos < currentTimeInSeconds)
+            ) {
+                // Solo guarda si el nuevo piso es mayor o si es el mismo piso pero con menor tiempo
+                await guardarDatos(newFloor, formattedTime);
+            }
+        }
+    } catch (error) {
+        console.error("Error en la conexión:", error);
+    }
+}
+
+async function guardarDatos(piso, tiempo) {
     try {
         const response = await fetch("../../Module/update_user.php", {
-            // Cambia el nombre del archivo según sea necesario
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -61,6 +95,13 @@ async function enviarDatosMuerte(piso, tiempo) {
     } catch (error) {
         console.error("Error en la conexión:", error);
     }
+}
+
+function timeToSeconds(time) {
+    const parts = time.split(":");
+    return (
+        parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2])
+    );
 }
 
 // Exportar la función

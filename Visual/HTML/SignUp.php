@@ -13,16 +13,20 @@ if (empty($_SESSION['csrf_token'])) {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Register</title>
+        <!-- Metadatos -->
+        <meta name="author" content="Matias Ruibal" />
+        <meta name="github" content="https://github.com/Matias372" />
+        
         <!-- Modificar el Content Security Policy para permitir los recursos necesarios -->
         <meta
-            http-equiv="Content-Security-Policy"
-            content="
+    http-equiv="Content-Security-Policy"
+    content="
         default-src 'self';
         script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://stackpath.bootstrapcdn.com;
-        style-src 'self' https://fonts.googleapis.com https://stackpath.bootstrapcdn.com;
+        style-src 'self' https://fonts.googleapis.com https://stackpath.bootstrapcdn.com 'unsafe-inline';
         font-src https://fonts.gstatic.com;
     "
-        />
+/>
         <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"

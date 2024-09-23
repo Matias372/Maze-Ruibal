@@ -1,17 +1,6 @@
 <?php
-// Configuración de la base de datos
-$servername = "localhost";
-$username = "root"; // Cambia esto si es necesario
-$password = ""; // Cambia esto si es necesario
-$dbname = "maze_db"; // Cambia esto por tu nombre de base de datos
+require 'db_connection.php';
 
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
 
 // Obtener UUID enviado
 $uuid = $_POST['uuid'];
