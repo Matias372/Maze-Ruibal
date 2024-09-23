@@ -1,7 +1,7 @@
 // ImageLoader.js
 
 // Datos de imágenes para precargar
-const imagenes = [
+export const imagenes = [
     {
         id: "StartingRoom",
         src: "../../Assets/Background/Corridor-Straigth.webp",

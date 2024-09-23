@@ -1,11 +1,15 @@
-// Importar datos del juego
-import { gameData } from "./GameData.js";
-
-const PROB_EVENTO_POSITIVO = 0.25; // 25% de probabilidad de ser un evento positivo
-const PROB_EVENTO_NEGATIVO = 0.25; // 25% de probabilidad de ser un evento negativo
+// Importar datos del juego y utilidades
+import { gameData } from "./ScenariosDescription.js";
+import { aplicarDaño, actualizarFiltros } from "./PlayerDamageAndEffects.js";
+import { actualizarDescripcion } from "./TextUpdater.js"; // Cambiaste el nombre de TextUtils.js
+import { cargarDatosPersonaje } from "./Character.js";
+import { checkCharacterLife } from "./ExploreTimer.js";
+import { escenarioImages } from "./ImageLoader.js";
+const PROB_EVENTO_POSITIVO = 0.25;
+const PROB_EVENTO_NEGATIVO = 0.25;
 
 // =========================
-// 3. Función para generar el tipo de evento
+// 1. Función para generar el tipo de evento
 // =========================
 function generarEvento() {
     let random = Math.random();
@@ -20,7 +24,7 @@ function generarEvento() {
 }
 
 // =========================
-// 4. Función para seleccionar escenario según evento
+// 2. Función para seleccionar escenario según evento
 // =========================
 function seleccionarEscenario(tipo) {
     let escenarioSeleccionado;
@@ -47,14 +51,12 @@ function seleccionarEscenario(tipo) {
     return escenarioSeleccionado.name; // Solo devolvemos el nombre del escenario
 }
 
-// Función auxiliar para seleccionar un escenario aleatorio
 function seleccionarEscenarioAleatorio(escenarios) {
-    const escenario = escenarios[Math.floor(Math.random() * escenarios.length)];
-    return escenario; // Devuelve el objeto completo para obtener el nombre en la función principal
+    return escenarios[Math.floor(Math.random() * escenarios.length)];
 }
 
 // =========================
-// 5. Función para mostrar opciones del escenario
+// 3. Función para mostrar opciones del escenario
 // =========================
 function mostrarOpciones(tipo, nuevoEscenario) {
     const botonIzquierda = document.querySelector(".options-Izquierda");
@@ -128,15 +130,7 @@ function mostrarOpciones(tipo, nuevoEscenario) {
                 botonUsar.style.display = "inline-block";
                 break;
             case "Corridor-Fountain":
-                botonUsar.innerText = "Drink"; // "Beber" becomes "Drink"
-                botonUsar.style.display = "inline-block";
-                botonContinuar.style.display = "inline-block"; // "Seguir" becomes "Continue"
-                break;
             case "Corridor-Fountain (w/ torch)":
-                botonUsar.innerText = "Drink"; // "Beber" becomes "Drink"
-                botonUsar.style.display = "inline-block";
-                botonContinuar.style.display = "inline-block"; // "Seguir" becomes "Continue"
-                break;
             case "Corridor-Fountain (panic)":
                 botonUsar.innerText = "Drink"; // "Beber" becomes "Drink"
                 botonUsar.style.display = "inline-block";
@@ -166,4 +160,80 @@ function mostrarOpciones(tipo, nuevoEscenario) {
     }
 }
 
-export { generarEvento, seleccionarEscenario, mostrarOpciones };
+// =========================
+// 4. Función para cambiar el escenario
+// =========================
+//REVISAR HAY QUE MODIFICAR ESTO. estado debe tener todas las variables modificar el llamado.
+function cambiarEscenario(tipo, nuevoEscenario, estado) {
+    const sceneEffects = document.querySelector(".scene__effects");
+    const background = document.querySelector(".scene__background");
+
+    sceneEffects.classList.add("visible");
+
+    setTimeout(() => {
+        if (escenarioImages[nuevoEscenario]) {
+            background.style.backgroundImage = `url(${escenarioImages[nuevoEscenario].src})`;
+        }
+
+        sceneEffects.classList.remove("visible");
+
+        // Actualiza los parámetros con la función aplicarDaño
+        const {
+            vida: nuevaVida,
+            escudo: nuevoEscudo,
+            botas: nuevasBotas,
+        } = aplicarDaño(
+            nuevoEscenario,
+            estado.vida,
+            estado.escudo,
+            estado.botas
+        );
+
+        // Actualiza el estado
+        estado.vida = nuevaVida;
+        estado.escudo = nuevoEscudo;
+        estado.botas = nuevasBotas;
+
+        // Actualiza los filtros
+        const { torch: nuevaAntorcha, stress: nuevoStress } = actualizarFiltros(
+            torch,
+            stress
+        );
+        estado.torch = nuevaAntorcha;
+        estado.stress = nuevoStress;
+
+        ItemUsed = false;
+        actualizarDOM(
+            estado.subsuelo,
+            estado.vida,
+            estado.stress,
+            estado.escudo,
+            estado.botas,
+            estado.torch
+        );
+
+        // Llamada a la función para rellenar la descripción
+        actualizarDescripcion(nuevoEscenario, botas, escudo, lastFountainFloor);
+        mostrarOpciones(tipo, nuevoEscenario);
+
+        //
+        if (nuevoEscenario === "StartingRoom") {
+            cargarDatosPersonaje();
+            actualizarDOM(subsuelo, vida, stress, escudo, botas, torch);
+        }
+        if (vida <= 0) {
+            const tiempo = checkCharacterLife(vida);
+            mostrarMensajeMuerte(subsuelo, tiempo);
+            mostrarOpciones("Neutro", "DeadScene");
+            return;
+        }
+    }, 1000);
+}
+
+// Exportar todas las funciones necesarias
+export {
+    generarEvento,
+    seleccionarEscenario,
+    mostrarOpciones,
+    cambiarEscenario,
+};

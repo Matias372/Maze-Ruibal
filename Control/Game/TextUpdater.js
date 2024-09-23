@@ -1,6 +1,6 @@
 // DescripcionUtils.js
 
-import { gameData } from "./GameData.js";
+import { gameData } from "./ScenariosDescription.js";
 
 // Obtiene las descripciones de los escenarios desde gameData
 const descripciones = gameData.scenarios.Positivo.concat(
