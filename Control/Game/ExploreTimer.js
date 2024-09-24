@@ -12,7 +12,8 @@ function startTimer() {
     timer = setInterval(() => {
         if (isExploring) {
             const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Tiempo en segundos
-            // Aquí puedes agregar código para manejar el tiempo si es necesario
+
+            //console.log(`Tiempo transcurrido: ${elapsedTime} segundos`); // Ejemplo de uso
         }
     }, 1000);
 }
@@ -25,6 +26,11 @@ function stopTimer() {
 
 // Función para verificar la vida del personaje
 function checkCharacterLife(vida) {
+    if (typeof vida !== "number") {
+        console.error("La vida debe ser un número.");
+        return null; // Manejo de error si 'vida' no es un número
+    }
+
     if (vida <= 0) {
         const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Tiempo transcurrido en segundos
         stopTimer();

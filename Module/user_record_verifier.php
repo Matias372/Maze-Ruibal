@@ -11,12 +11,13 @@ if ($conn->connect_error) {
     exit();
 }
 
-// Prepara y ejecuta la consulta SQL para obtener el top 10 de jugadores
-$sql = "SELECT user, floor, time FROM usuarios ORDER BY floor DESC, time ASC LIMIT 10";
+// Prepara y ejecuta la consulta SQL para obtener el ranking
+$sql = "SELECT floor, time FROM usuarios ORDER BY floor DESC, time ASC";
 $result = $conn->query($sql);
 
 // Verifica si la consulta fue exitosa
 if (!$result) {
+    // Manejo de errores en caso de que la consulta falle
     echo json_encode(["error" => "Error en la consulta: " . $conn->error]);
     $conn->close();
     exit();
@@ -30,6 +31,6 @@ while ($row = $result->fetch_assoc()) {
 // Cierra la conexión a la base de datos
 $conn->close();
 
-// Devolver resultados en formato JSON
+// Devolver resultados en formato JSON, incluso si no hay registros
 echo json_encode($ranking);
 ?>

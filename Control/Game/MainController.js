@@ -14,14 +14,14 @@ let estadoPersonaje = {
     escudo: 0,
     botas: 0,
     torch: 0,
+    lastEvent: "Neutro",
+    lastScenario: "StartingRoom",
+    lastFountainFloor: -1,
+    ItemUsed: false,
+    MAX_VIDA: 100,
+    MAX_STRESS: 100,
+    MAX_TORCH: 10,
 };
-const MAX_VIDA = 100,
-    MAX_STRESS = 100,
-    MAX_TORCH = 10;
-let lastEvent;
-let lastScenario;
-let lastFountainFloor = -1;
-let ItemUsed = false;
 
 // =========================
 // 2. Funciones de inicialización
@@ -47,4 +47,6 @@ document
         manejarClicBoton(event, estadoPersonaje)
     );
 
-document.getElementById("btn-usar").addEventListener("click", usarObjeto);
+document
+    .getElementById("btn-usar")
+    .addEventListener("click", () => usarObjeto(estadoPersonaje));

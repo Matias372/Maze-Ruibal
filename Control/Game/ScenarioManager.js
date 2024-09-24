@@ -2,9 +2,11 @@
 import { gameData } from "./ScenariosDescription.js";
 import { aplicarDaño, actualizarFiltros } from "./PlayerDamageAndEffects.js";
 import { actualizarDescripcion } from "./TextUpdater.js"; // Cambiaste el nombre de TextUtils.js
-import { cargarDatosPersonaje } from "./Character.js";
+import { cargarDatosPersonaje, actualizarDOM } from "./Character.js";
 import { checkCharacterLife } from "./ExploreTimer.js";
 import { escenarioImages } from "./ImageLoader.js";
+import { mostrarMensajeMuerte } from "./DeathMessage.js";
+
 const PROB_EVENTO_POSITIVO = 0.25;
 const PROB_EVENTO_NEGATIVO = 0.25;
 
@@ -164,15 +166,17 @@ function mostrarOpciones(tipo, nuevoEscenario) {
 // 4. Función para cambiar el escenario
 // =========================
 //REVISAR HAY QUE MODIFICAR ESTO. estado debe tener todas las variables modificar el llamado.
-function cambiarEscenario(tipo, nuevoEscenario, estado) {
+function cambiarEscenario(estado) {
     const sceneEffects = document.querySelector(".scene__effects");
     const background = document.querySelector(".scene__background");
 
     sceneEffects.classList.add("visible");
 
     setTimeout(() => {
-        if (escenarioImages[nuevoEscenario]) {
-            background.style.backgroundImage = `url(${escenarioImages[nuevoEscenario].src})`;
+        if (escenarioImages[estado.escenario]) {
+            background.style.backgroundImage = `url(${
+                escenarioImages[estado.escenario].src
+            })`;
         }
 
         sceneEffects.classList.remove("visible");
@@ -183,7 +187,7 @@ function cambiarEscenario(tipo, nuevoEscenario, estado) {
             escudo: nuevoEscudo,
             botas: nuevasBotas,
         } = aplicarDaño(
-            nuevoEscenario,
+            estado.escenario,
             estado.vida,
             estado.escudo,
             estado.botas
@@ -196,13 +200,13 @@ function cambiarEscenario(tipo, nuevoEscenario, estado) {
 
         // Actualiza los filtros
         const { torch: nuevaAntorcha, stress: nuevoStress } = actualizarFiltros(
-            torch,
-            stress
+            estado.torch,
+            estado.stress
         );
         estado.torch = nuevaAntorcha;
         estado.stress = nuevoStress;
 
-        ItemUsed = false;
+        estado.ItemUsed = false;
         actualizarDOM(
             estado.subsuelo,
             estado.vida,
@@ -213,17 +217,29 @@ function cambiarEscenario(tipo, nuevoEscenario, estado) {
         );
 
         // Llamada a la función para rellenar la descripción
-        actualizarDescripcion(nuevoEscenario, botas, escudo, lastFountainFloor);
-        mostrarOpciones(tipo, nuevoEscenario);
+        actualizarDescripcion(
+            estado.escenario,
+            estado.botas,
+            estado.escudo,
+            estado.lastFountainFloor
+        );
+        mostrarOpciones(estado.evento, estado.escenario);
 
         //
-        if (nuevoEscenario === "StartingRoom") {
-            cargarDatosPersonaje();
-            actualizarDOM(subsuelo, vida, stress, escudo, botas, torch);
+        if (estado.escenario === "StartingRoom") {
+            cargarDatosPersonaje(estado);
+            actualizarDOM(
+                estado.subsuelo,
+                estado.vida,
+                estado.stress,
+                estado.escudo,
+                estado.botas,
+                estado.torch
+            );
         }
-        if (vida <= 0) {
-            const tiempo = checkCharacterLife(vida);
-            mostrarMensajeMuerte(subsuelo, tiempo);
+        if (estado.vida <= 0) {
+            const tiempo = checkCharacterLife(estado.vida);
+            mostrarMensajeMuerte(estado.subsuelo, tiempo);
             mostrarOpciones("Neutro", "DeadScene");
             return;
         }

@@ -5,6 +5,7 @@ import {
 } from "./ScenarioManager.js";
 import { usarAccion } from "./Items.js";
 import { startTimer, stopTimer } from "./ExploreTimer.js"; // Asegúrate de que la ruta sea correcta
+import { VerificPanic } from "./VerificPanic.js";
 
 export function manejarClicBoton(event, estado) {
     const target = event.target;
@@ -52,14 +53,14 @@ export function manejarClicBoton(event, estado) {
         }
 
         if (estado.escenario === "Corridor-Fountain (w/ torch)") {
-            estado.torch = Math.min(estado.torch + 5, MAX_TORCH);
+            estado.torch = Math.min(estado.torch + 5, estado.MAX_TORCH);
         }
 
         if (
             estado.escenario === "Corridor-Fountain (w/ torch)" ||
             estado.escenario === "Corridor-Fountain"
         ) {
-            lastFountainFloor = estado.subsuelo;
+            estado.lastFountainFloor = estado.subsuelo;
         }
 
         // Verificación de estrés
@@ -69,16 +70,16 @@ export function manejarClicBoton(event, estado) {
             if (panicResult) {
                 estado.escenario = "Corridor-Fountain (panic)";
                 estado.evento = "Positivo";
-                if (lastFountainFloor !== -1) {
-                    estado.subsuelo = lastFountainFloor;
+                if (estado.lastFountainFloor !== -1) {
+                    estado.subsuelo = estado.lastFountainFloor;
                 }
                 estado.stress += 50;
-                cambiarEscenario(estado.evento, estado.escenario);
+                cambiarEscenario(estado);
             } else {
-                cambiarEscenario(estado.evento, estado.escenario); // Cambia el escenario si VerificPanic devuelve false
+                cambiarEscenario(estado); // Cambia el escenario si VerificPanic devuelve false
             }
         } else {
-            cambiarEscenario(estado.evento, estado.escenario); // Cambia el escenario si el estrés es 100 o más
+            cambiarEscenario(estado); // Cambia el escenario si el estrés es 100 o más
         }
     }
 
@@ -94,6 +95,6 @@ export function manejarClicBoton(event, estado) {
 }
 
 // Lógica para manejar el uso de objetos
-export function usarObjeto() {
-    usarAccion();
+export function usarObjeto(estado) {
+    usarAccion(estado);
 }

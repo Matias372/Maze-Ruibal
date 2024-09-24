@@ -1,12 +1,15 @@
 // Función para convertir segundos a formato HH:MM:SS
 function formatTime(seconds) {
+    if (typeof seconds !== "number" || isNaN(seconds)) {
+        return "00:00:00"; // Retorna un formato por defecto en caso de error
+    }
     const hours = Math.floor(seconds / 3600)
         .toString()
-        .padStart(2, "0"); // Calcula las horas
+        .padStart(2, "0");
     const minutes = Math.floor((seconds % 3600) / 60)
         .toString()
-        .padStart(2, "0"); // Calcula los minutos
-    const secs = (seconds % 60).toString().padStart(2, "0"); // Calcula los segundos
+        .padStart(2, "0");
+    const secs = (seconds % 60).toString().padStart(2, "0");
 
     return `${hours}:${minutes}:${secs}`;
 }
@@ -14,55 +17,69 @@ function formatTime(seconds) {
 // Función para mostrar el mensaje de muerte
 async function mostrarMensajeMuerte(piso, tiempo) {
     const deathMessageDiv = document.getElementById("death-message");
-
-    // Convertir el tiempo a formato HH:MM:SS
     const formattedTime = formatTime(tiempo);
 
-    // Cambiar el contenido del mensaje de muerte
     deathMessageDiv.innerHTML = `
         <h2>You have died!</h2>
         <p>You reached floor: ${piso}</p>
         <p>Your time was: ${formattedTime}</p>
     `;
 
-    // Mostrar el mensaje
     deathMessageDiv.style.display = "flex"; // Mostrar el div
-
-    // Enviar el piso y el tiempo al servidor
     await enviarDatosMuerte(piso, tiempo);
 }
 
 // Función para enviar datos al servidor
-async function enviarDatosMuerte(piso, tiempoEnSegundos) {
-    const formattedTime = formatTime(tiempoEnSegundos);
+async function enviarDatosMuerte(floor, timeInSeconds) {
+    const formattedTime = formatTime(timeInSeconds);
 
+    console.log(`Enviando datos: Floor: ${floor}, Time: ${formattedTime}`);
     try {
-        // Primero, obtén el ranking actual desde el servidor
-        const responseRanking = await fetch("../../Module/get_ranking.php");
-        const ranking = await responseRanking.json(); // Supongamos que recibes un arreglo de objetos
+        const responseRanking = await fetch(
+            "../../Module/user_record_verifier.php"
+        );
 
-        // Buscar el registro correspondiente al piso actual
+        if (!responseRanking.ok) {
+            throw new Error(
+                `Error al obtener el ranking: ${responseRanking.status} - ${responseRanking.statusText}`
+            );
+        }
+
+        const ranking = await responseRanking.json();
+
+        if (!Array.isArray(ranking) || ranking.length === 0) {
+            console.error(
+                "La respuesta no es un array válido o está vacía:",
+                ranking
+            );
+            return;
+        }
+
         const currentRecord = ranking.find(
-            (record) => record.floor === piso
-        ) || { floor: 0, time: "00:00:00" };
+            (record) => record.floor === floor.toString() // Asegúrate de que estés buscando en el formato correcto
+        );
 
-        // Verifica si es un nuevo récord
-        if (currentRecord.floor === 0 && currentRecord.time === "00:00:00") {
-            // Guarda directamente si el piso es 0 y el tiempo es "00:00:00"
-            await guardarDatos(piso, formattedTime);
+        // Si no se encuentra el registro, imprimir el ranking completo para depuración
+        if (!currentRecord) {
+            console.error("No se encontró un registro para el piso:", floor);
+            console.log("Ranking completo:", ranking);
+            return; // O asignar un registro por defecto si lo deseas
+        }
+
+        const newFloor = floor;
+        const currentFloor = parseInt(currentRecord.floor, 10); // Convertir a número para la comparación
+        const currentTimeInSeconds = timeToSeconds(currentRecord.time);
+
+        // Comprobar si el nuevo piso es mayor o si es igual y el tiempo es menor
+        if (
+            newFloor > currentFloor ||
+            (newFloor === currentFloor && timeInSeconds < currentTimeInSeconds)
+        ) {
+            await guardarDatos(newFloor, formattedTime);
         } else {
-            const newFloor = piso;
-            const currentFloor = currentRecord.floor;
-            const currentTimeInSeconds = timeToSeconds(currentRecord.time);
-
-            if (
-                newFloor > currentFloor ||
-                (newFloor === currentFloor &&
-                    tiempoEnSegundos < currentTimeInSeconds)
-            ) {
-                // Solo guarda si el nuevo piso es mayor o si es el mismo piso pero con menor tiempo
-                await guardarDatos(newFloor, formattedTime);
-            }
+            console.log(
+                "No se requiere actualización, los datos son iguales o peores."
+            );
         }
     } catch (error) {
         console.error("Error en la conexión:", error);
@@ -70,6 +87,8 @@ async function enviarDatosMuerte(piso, tiempoEnSegundos) {
 }
 
 async function guardarDatos(piso, tiempo) {
+    console.log("Intentando guardar datos:", piso, tiempo);
+
     try {
         const response = await fetch("../../Module/update_user.php", {
             method: "POST",

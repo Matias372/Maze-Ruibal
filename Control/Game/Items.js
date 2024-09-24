@@ -1,3 +1,6 @@
+import { actualizarDOM } from "./Character.js";
+import { abrirCofre } from "./ChestRewards.js";
+import { manejarClicBoton } from "./UserInputHandler.js";
 // Items.js
 
 // Procesa la recompensa seleccionada y actualiza los atributos del personaje
@@ -37,65 +40,110 @@ export function procesarRecompensa(
 // =========================
 // 2. Función para manejar el botón "Usar"
 // =========================
-export function usarAccion() {
-    if (!ItemUsed) {
-        switch (escenario) {
+export function usarAccion(estado) {
+    if (!estado.ItemUsed) {
+        switch (estado.escenario) {
             case "Corridor-Fountain (panic)":
-                vida = Math.min(vida + 25, MAX_VIDA); // valor minimo entre vida y MAX_VIDA, recordar...
-                actualizarDOM(subsuelo, vida, stress, escudo, botas, torch);
+                estado.vida = Math.min(estado.vida + 25, estado.MAX_VIDA); // valor minimo entre vida y MAX_VIDA, recordar...
+                actualizarDOM(
+                    estado.subsuelo,
+                    estado.vida,
+                    estado.stress,
+                    estado.escudo,
+                    estado.botas,
+                    estado.torch
+                );
                 console.log(
                     "Has bebido en la fuente y recuperado vida. Vida actual:",
-                    vida
+                    estado.vida
                 );
                 break;
 
             case "Corridor-Fountain (w/ torch)":
-                vida = Math.min(vida + 25, MAX_VIDA); // valor minimo entre vida y MAX_VIDA, recordar...
-                actualizarDOM(subsuelo, vida, stress, escudo, botas, torch);
+                estado.vida = Math.min(estado.vida + 25, estado.MAX_VIDA); // valor minimo entre vida y MAX_VIDA, recordar...
+                actualizarDOM(
+                    estado.subsuelo,
+                    estado.vida,
+                    estado.stress,
+                    estado.escudo,
+                    estado.botas,
+                    estado.torch
+                );
                 console.log(
                     "Has bebido en la fuente y recuperado vida. Vida actual:",
-                    vida
+                    estado.vida
                 );
                 break;
 
             case "Corridor-Fountain":
-                vida = Math.min(vida + 25, MAX_VIDA); // valor minimo entre vida y MAX_VIDA, recordar...
-                actualizarDOM(subsuelo, vida, stress, escudo, botas, torch);
+                estado.vida = Math.min(estado.vida + 25, estado.MAX_VIDA); // valor minimo entre vida y MAX_VIDA, recordar...
+                actualizarDOM(
+                    estado.subsuelo,
+                    estado.vida,
+                    estado.stress,
+                    estado.escudo,
+                    estado.botas,
+                    estado.torch
+                );
                 console.log(
                     "Has bebido en la fuente y recuperado vida. Vida actual:",
-                    vida
+                    estado.vida
                 );
                 break;
 
             case "Corridor-Chest":
                 // Llamar a abrirCofre y actualizar los valores del personaje
                 const resultadosCofre = abrirCofre(
-                    subsuelo,
-                    vida,
-                    stress,
-                    escudo,
-                    botas,
-                    torch,
-                    MAX_TORCH
+                    estado.subsuelo,
+                    estado.vida,
+                    estado.stress,
+                    estado.escudo,
+                    estado.botas,
+                    estado.torch,
+                    estado.MAX_TORCH
                 );
 
                 // Actualizar las variables con los valores retornados
-                vida = resultadosCofre.vida;
-                escudo = resultadosCofre.escudo;
-                botas = resultadosCofre.botas;
-                torch = resultadosCofre.torch;
+                estado.vida = resultadosCofre.vida;
+                estado.escudo = resultadosCofre.escudo;
+                estado.botas = resultadosCofre.botas;
+                estado.torch = resultadosCofre.torch;
 
                 // El DOM ya se actualiza dentro de abrirCofre
                 break;
 
             case "Corridor-Stairs":
-                subsuelo += 1;
-                actualizarDOM(subsuelo, vida, stress, escudo, botas, torch);
-
-                manejarClicBoton({ target: { matches: () => true } });
+                estado.subsuelo += 1;
+                actualizarDOM(
+                    estado.subsuelo,
+                    estado.vida,
+                    estado.stress,
+                    estado.escudo,
+                    estado.botas,
+                    estado.torch
+                );
+                //"{ target: { matches: () => true } }" hace que el evento se active.
+                manejarClicBoton(
+                    {
+                        target: {
+                            matches: (selector) => {
+                                // Devuelve true solo si el botón NO es explorar ni reiniciar
+                                return (
+                                    selector !== "#boton-explorar" &&
+                                    selector !== "#btn-restart"
+                                );
+                            },
+                            classList: {
+                                contains: (className) =>
+                                    className === "menu__option", // Simula que es un botón de opción del menú
+                            },
+                        },
+                    },
+                    estado
+                );
                 console.log(
                     "Has subido al siguiente piso. Piso actual:",
-                    subsuelo
+                    estado.subsuelo
                 );
                 break;
 
@@ -104,7 +152,7 @@ export function usarAccion() {
                 break;
         }
 
-        ItemUsed = true;
+        estado.ItemUsed = true;
     } else {
         console.log("Ya has usado el objeto en este escenario.");
     }

@@ -8,12 +8,12 @@ ini_set('display_errors', 1);
 
 if (isset($_POST['floor']) && isset($_POST['time']) && isset($_SESSION['user_id'])) {
     $floor = intval($_POST['floor']); // Asegúrate de que sea un número entero
-    $time = intval($_POST['time']); // Asegúrate de que sea un número entero
+    $time = $_POST['time']; // Mantenlo como string
     $userId = $_SESSION['user_id'];
 
     // Preparar la consulta
     $stmt = $conn->prepare("UPDATE usuarios SET floor = ?, time = ? WHERE id = ?");
-    $stmt->bind_param("iii", $floor, $time, $userId); // "iii" indica tres enteros
+    $stmt->bind_param("ssi", $floor, $time, $userId); // Cambiar "iii" a "ssi"
 
     // Ejecutar la consulta
     if ($stmt->execute()) {
