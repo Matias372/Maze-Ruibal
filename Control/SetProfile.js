@@ -153,71 +153,59 @@ document.addEventListener("DOMContentLoaded", () => {
     document
         .querySelector(".profile__delete .btn-danger")
         .addEventListener("click", () => {
-            showConfirmationDialog(
-                "Are you sure you want to delete your account? This action cannot be undone.",
-                function () {
-                    // Código para eliminar la cuenta
-                    const xhr = new XMLHttpRequest();
-                    xhr.open("POST", "../../Module/DeleteAccount.php", true);
-                    xhr.onload = function () {
-                        try {
-                            const response = JSON.parse(xhr.responseText);
-                            if (response.success) {
-                                // Llamar al script de logout.php para cerrar la sesión
-                                const logoutXhr = new XMLHttpRequest();
-                                logoutXhr.open(
-                                    "POST",
-                                    "../../Module/logout.php",
-                                    true
-                                );
-                                logoutXhr.onload = function () {
-                                    if (
-                                        logoutXhr.status >= 200 &&
-                                        logoutXhr.status < 300
-                                    ) {
-                                        showConfirmationMessage(
-                                            "Account deleted successfully!",
-                                            "success"
-                                        );
-                                        setTimeout(() => {
-                                            window.location.href = "SignIn.php"; // Redirigir a la página de inicio de sesión
-                                        }, 2000); // Esperar 2 segundos antes de redirigir
-                                    } else {
-                                        showConfirmationMessage(
-                                            "An error occurred during logout.",
-                                            "error"
-                                        );
-                                    }
-                                };
-                                logoutXhr.onerror = function () {
-                                    showConfirmationMessage(
-                                        "An error occurred while logging out.",
-                                        "error"
-                                    );
-                                };
-                                logoutXhr.send();
-                            } else {
-                                showConfirmationMessage(
-                                    "Failed to delete account",
-                                    "error"
-                                );
-                            }
-                        } catch (e) {
-                            showConfirmationMessage(
-                                "An unexpected error occurred.",
-                                "error"
-                            );
-                        }
-                    };
-                    xhr.onerror = function () {
-                        showConfirmationMessage(
-                            "An error occurred while deleting the account.",
-                            "error"
-                        );
-                    };
-                    xhr.send();
-                }
+            // Diálogo de confirmación
+            const confirmDelete = confirm(
+                "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer."
             );
+
+            if (confirmDelete) {
+                // Código para eliminar la cuenta
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "../../Module/DeleteAccount.php", true);
+                xhr.onload = function () {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            // Llamar al script de logout.php para cerrar la sesión
+                            const logoutXhr = new XMLHttpRequest();
+                            logoutXhr.open(
+                                "POST",
+                                "../../Module/logout.php",
+                                true
+                            );
+                            logoutXhr.onload = function () {
+                                if (
+                                    logoutXhr.status >= 200 &&
+                                    logoutXhr.status < 300
+                                ) {
+                                    alert("¡Cuenta eliminada con éxito!");
+                                    setTimeout(() => {
+                                        window.location.href = "SignIn.php"; // Redirigir a la página de inicio de sesión
+                                    }, 2000); // Esperar 2 segundos antes de redirigir
+                                } else {
+                                    alert(
+                                        "Ocurrió un error al cerrar la sesión."
+                                    );
+                                }
+                            };
+                            logoutXhr.onerror = function () {
+                                alert("Ocurrió un error al cerrar la sesión.");
+                            };
+                            logoutXhr.send();
+                        } else {
+                            alert("No se pudo eliminar la cuenta.");
+                        }
+                    } catch (e) {
+                        alert("Ocurrió un error inesperado.");
+                    }
+                };
+                xhr.onerror = function () {
+                    alert("Ocurrió un error al intentar eliminar la cuenta.");
+                };
+                xhr.send();
+            } else {
+                alert("Eliminación de cuenta cancelada.");
+            }
         });
 
     function showConfirmationMessage(message, type) {

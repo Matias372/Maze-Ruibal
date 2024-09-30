@@ -24,11 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     async function checkIfLoggedIn() {
         try {
             const response = await fetch(checkSessionUrl);
-            if (!response.ok)
+            if (!response.ok) {
                 throw new Error(
                     `Error ${response.status}: ${response.statusText}`
                 );
-            const result = await response.json();
+            }
+            const result = await response.json(); // Aquí ocurre el error si no es JSON
             const sessionLinks = document.getElementById(
                 "header__session-links"
             );
@@ -52,6 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } catch (error) {
             console.error(`Failed to check session status: ${error.message}`);
+
+            // Log the response body to check what's being returned
+            const responseText = await error.response?.text();
+            console.error(`Response received: ${responseText}`);
         }
     }
 
