@@ -1,4 +1,4 @@
-// DescripcionUtils.js
+// TextUpdater.js
 
 import { gameData } from "./ScenariosDescription.js";
 
@@ -11,7 +11,7 @@ const descripciones = gameData.scenarios.Positivo.concat(
     return acc;
 }, {});
 
-function actualizarDescripcion(escenario, botas, escudo, VFountain) {
+function actualizarDescripcion(escenario, estado) {
     const descripcionElemento = document.getElementById("scene-description");
 
     // Verifica si el escenario tiene una descripción
@@ -20,15 +20,15 @@ function actualizarDescripcion(escenario, botas, escudo, VFountain) {
     if (escenarioData) {
         // Para los escenarios con opciones múltiples de descripción
         if (escenario === "Corridor-Trap") {
-            descripcionElemento.textContent = botas
+            descripcionElemento.textContent = estado.botas
                 ? escenarioData.withItem
                 : escenarioData.default;
         } else if (escenario === "Corridor-Monster") {
-            descripcionElemento.textContent = escudo
+            descripcionElemento.textContent = estado.escudo
                 ? escenarioData.withItem
                 : escenarioData.default;
         } else if (escenario === "Corridor-Fountain (panic)") {
-            if (VFountain === -1) {
+            if (estado.lastFountainFloor === -1) {
                 descripcionElemento.textContent = escenarioData.withItem;
             } else {
                 descripcionElemento.textContent = escenarioData.default;

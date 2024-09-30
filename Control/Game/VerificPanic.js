@@ -1,4 +1,6 @@
 export function VerificPanic(stress) {
+    console.log(`Valor de stress: ${stress}`); // Agrega esta línea para verificar el valor de stress
+
     // Cálculo de la probabilidad de pánico en función del estrés
     const panicProbability = Math.max(5, 50 - stress / 2); // 50% cuando stress = 0, 0% cuando stress = 100
 

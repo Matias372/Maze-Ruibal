@@ -1,8 +1,7 @@
 // Importar datos del juego y utilidades
 import { gameData } from "./ScenariosDescription.js";
 import { aplicarDaño, actualizarFiltros } from "./PlayerDamageAndEffects.js";
-import { actualizarDescripcion } from "./TextUpdater.js"; // Cambiaste el nombre de TextUtils.js
-import { cargarDatosPersonaje, actualizarDOM } from "./Character.js";
+import { actualizarDescripcion } from "./TextUpdater.js"; // Importar solo lo necesario
 import { checkCharacterLife } from "./ExploreTimer.js";
 import { escenarioImages } from "./ImageLoader.js";
 import { mostrarMensajeMuerte } from "./DeathMessage.js";
@@ -193,7 +192,7 @@ function cambiarEscenario(estado) {
             estado.botas
         );
 
-        // Actualiza el estado
+        // Actualiza el estado del personaje usando métodos de la clase
         estado.vida = nuevaVida;
         estado.escudo = nuevoEscudo;
         estado.botas = nuevasBotas;
@@ -207,14 +206,9 @@ function cambiarEscenario(estado) {
         estado.stress = nuevoStress;
 
         estado.ItemUsed = false;
-        actualizarDOM(
-            estado.subsuelo,
-            estado.vida,
-            estado.stress,
-            estado.escudo,
-            estado.botas,
-            estado.torch
-        );
+
+        // Actualizar DOM mediante el método de la clase
+        estado.actualizarDOM();
 
         // Llamada a la función para rellenar la descripción
         actualizarDescripcion(
@@ -225,20 +219,22 @@ function cambiarEscenario(estado) {
         );
         mostrarOpciones(estado.evento, estado.escenario);
 
-        //
         if (estado.escenario === "StartingRoom") {
             cargarDatosPersonaje(estado);
-            actualizarDOM(
-                estado.subsuelo,
-                estado.vida,
-                estado.stress,
-                estado.escudo,
-                estado.botas,
-                estado.torch
-            );
+            estado.actualizarDOM();
         }
+
         if (estado.vida <= 0) {
             const tiempo = checkCharacterLife(estado.vida);
+
+            // Verifica si tiempo es nulo antes de continuar
+            if (tiempo === null) {
+                console.error(
+                    "Error: Tiempo no válido obtenido de checkCharacterLife."
+                );
+                return; // O maneja como desees
+            }
+
             mostrarMensajeMuerte(estado.subsuelo, tiempo);
             mostrarOpciones("Neutro", "DeadScene");
             return;

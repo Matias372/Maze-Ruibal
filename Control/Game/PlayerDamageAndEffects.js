@@ -1,4 +1,5 @@
 // Función auxiliar para aplicar daño
+// Función auxiliar para aplicar daño
 export function aplicarDaño(escenario, vida, escudo, botas) {
     const DamageEffects = document.querySelector(".scene__damage-effects");
     const sceneBackground = document.querySelector(".scene__background");
@@ -29,7 +30,7 @@ export function aplicarDaño(escenario, vida, escudo, botas) {
         console.log(mensaje);
     }
 
-    return { vida, escudo, botas };
+    return { vida, escudo, botas }; // Retorna un objeto con las propiedades modificadas
 }
 
 // Función para mostrar efectos de daño
@@ -48,6 +49,7 @@ function mostrarEfectoDeDaño(sceneBackground, DamageEffects) {
 
 import { escenarioImages } from "./ImageLoader.js";
 
+// Función auxiliar para actualizar la interfaz
 // Función auxiliar para actualizar la interfaz
 export function actualizarFiltros(torch, stress) {
     const sceneFilter = document.querySelector(".scene__filter");

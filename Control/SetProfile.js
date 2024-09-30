@@ -180,8 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                             "success"
                                         );
                                         setTimeout(() => {
-                                            window.location.href =
-                                                "SignIn.html"; // Redirigir a la página de inicio de sesión
+                                            window.location.href = "SignIn.php"; // Redirigir a la página de inicio de sesión
                                         }, 2000); // Esperar 2 segundos antes de redirigir
                                     } else {
                                         showConfirmationMessage(

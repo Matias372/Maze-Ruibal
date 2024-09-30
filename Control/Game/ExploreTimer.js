@@ -32,7 +32,7 @@ function checkCharacterLife(vida) {
     }
 
     if (vida <= 0) {
-        const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Tiempo transcurrido en segundos
+        const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
         stopTimer();
         return elapsedTime; // Devuelve el tiempo que pasó hasta ahora
     }

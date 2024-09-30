@@ -7,7 +7,7 @@ import { usarAccion } from "./Items.js";
 import { startTimer, stopTimer } from "./ExploreTimer.js"; // Asegúrate de que la ruta sea correcta
 import { VerificPanic } from "./VerificPanic.js";
 
-export function manejarClicBoton(event, estado) {
+export function manejarClicBoton(event, personaje) {
     const target = event.target;
 
     if (target.matches("#boton-explorar")) {
@@ -17,15 +17,18 @@ export function manejarClicBoton(event, estado) {
     }
 
     if (target.matches("button.menu__option")) {
-        const lastEvent = estado.evento; // Guardar el evento anterior
-        const lastScenario = estado.escenario; // Guardar el escenario anterior
+        const lastEvent = personaje.evento; // Guardar el evento anterior
+        const lastScenario = personaje.escenario; // Guardar el escenario anterior
 
-        if (estado.escenario === "Corridor-TrapHole" && estado.subsuelo > 0) {
-            estado.subsuelo -= 1;
+        if (
+            personaje.escenario === "Corridor-TrapHole" &&
+            personaje.subsuelo > 0
+        ) {
+            personaje.subsuelo -= 1;
         }
 
-        estado.evento = generarEvento();
-        estado.escenario = seleccionarEscenario(estado.evento);
+        personaje.evento = generarEvento();
+        personaje.escenario = seleccionarEscenario(personaje.evento);
 
         const restrictedScenarios = [
             "Corridor-DeadEnd",
@@ -41,52 +44,57 @@ export function manejarClicBoton(event, estado) {
         // Evita escenarios restringidos
         while (
             (restrictedScenarios.includes(lastScenario) &&
-                estado.escenario === lastScenario) ||
-            (estado.escenario === "Corridor-TrapHole" &&
-                estado.subsuelo === 0) ||
-            estado.escenario === "Corridor-Fountain (panic)" ||
-            estado.escenario === "StartingRoom" ||
-            estado.escenario === "DeadScene"
+                personaje.escenario === lastScenario) ||
+            (personaje.escenario === "Corridor-TrapHole" &&
+                personaje.subsuelo === 0) ||
+            personaje.escenario === "Corridor-Fountain (panic)" ||
+            personaje.escenario === "StartingRoom" ||
+            personaje.escenario === "DeadScene"
         ) {
-            estado.evento = generarEvento();
-            estado.escenario = seleccionarEscenario(estado.evento);
+            personaje.evento = generarEvento();
+            personaje.escenario = seleccionarEscenario(personaje.evento);
         }
 
-        if (estado.escenario === "Corridor-Fountain (w/ torch)") {
-            estado.torch = Math.min(estado.torch + 5, estado.MAX_TORCH);
+        if (personaje.escenario === "Corridor-Fountain (w/ torch)") {
+            personaje.torch = Math.min(
+                personaje.torch + 5,
+                personaje.MAX_TORCH
+            );
         }
 
         if (
-            estado.escenario === "Corridor-Fountain (w/ torch)" ||
-            estado.escenario === "Corridor-Fountain"
+            personaje.escenario === "Corridor-Fountain (w/ torch)" ||
+            personaje.escenario === "Corridor-Fountain"
         ) {
-            estado.lastFountainFloor = estado.subsuelo;
+            personaje.lastFountainFloor = personaje.subsuelo;
         }
 
         // Verificación de estrés
-        if (estado.stress < 100) {
-            const panicResult = VerificPanic(estado.stress); // Llama a VerificPanic y obtiene el resultado
+        if (personaje.stress < 100) {
+            const panicResult = VerificPanic(personaje.stress); // Llama a VerificPanic y obtiene el resultado
 
             if (panicResult) {
-                estado.escenario = "Corridor-Fountain (panic)";
-                estado.evento = "Positivo";
-                if (estado.lastFountainFloor !== -1) {
-                    estado.subsuelo = estado.lastFountainFloor;
+                personaje.escenario = "Corridor-Fountain (panic)";
+                personaje.evento = "Positivo";
+                if (personaje.lastFountainFloor !== -1) {
+                    personaje.subsuelo = personaje.lastFountainFloor;
                 }
-                estado.stress += 50;
-                cambiarEscenario(estado);
+                personaje.stress += 50;
+                cambiarEscenario(personaje);
             } else {
-                cambiarEscenario(estado); // Cambia el escenario si VerificPanic devuelve false
+                cambiarEscenario(personaje); // Cambia el escenario si VerificPanic devuelve false
             }
         } else {
-            cambiarEscenario(estado); // Cambia el escenario si el estrés es 100 o más
+            cambiarEscenario(personaje); // Cambia el escenario si el estrés es 100 o más
         }
+
+        personaje.actualizarDOM(); // Actualizar el DOM después de cambiar el escenario o estrés
     }
 
     // Verificar si se reinicia el juego
     if (
         target.matches("#btn-restart") &&
-        estado.vida === 0 &&
+        personaje.vida === 0 &&
         target instanceof HTMLElement &&
         getComputedStyle(target).display !== "none"
     ) {
@@ -95,6 +103,6 @@ export function manejarClicBoton(event, estado) {
 }
 
 // Lógica para manejar el uso de objetos
-export function usarObjeto(estado) {
-    usarAccion(estado);
+export function usarObjeto(personaje) {
+    usarAccion(personaje); // Llama a usarAccion con la instancia de personaje
 }

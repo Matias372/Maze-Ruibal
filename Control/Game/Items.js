@@ -1,133 +1,79 @@
-import { actualizarDOM } from "./Character.js";
 import { abrirCofre } from "./ChestRewards.js";
 import { manejarClicBoton } from "./UserInputHandler.js";
+
 // Items.js
 
 // Procesa la recompensa seleccionada y actualiza los atributos del personaje
+// Items.js
+
+// Definición de la función procesarRecompensa
 export function procesarRecompensa(
     recompensa,
     vida,
     escudo,
     botas,
     torch,
-    MAX_TORCH
+    maxTorch
 ) {
+    // Lógica de procesamiento de recompensa
+    // Ejemplo simple:
     switch (recompensa) {
         case "boots":
+            // lógica para agregar botas
             botas = true;
-            console.log("Has obtenido unas botas.");
             break;
         case "shield":
+            // lógica para agregar escudo
             escudo = true;
-            console.log("Has obtenido un escudo.");
             break;
         case "torch":
-            torch = Math.min(torch + 5, MAX_TORCH); // Aumenta el valor de la antorcha hasta el máximo
-            console.log("Has obtenido 5 unidades de antorcha.");
+            // lógica para agregar antorcha
+            torch = Math.min(torch + 1, maxTorch);
             break;
         case "trap":
-            vida = Math.max(vida - 25, 0); // Reducir la vida al caer en una trampa
-            console.log("Has caído en una trampa. Vida actual:", vida);
+            // lógica para manejar trampas
+            vida -= 10; // Por ejemplo, pierde 10 de vida
             break;
         default:
             console.error("Recompensa desconocida:", recompensa);
+            break;
     }
-
-    // Retornar los nuevos valores
-    return { vida, escudo, botas, torch };
+    return { vida, escudo, botas, torch }; // Asegúrate de devolver los valores actualizados
 }
 
 // =========================
 // 2. Función para manejar el botón "Usar"
 // =========================
-export function usarAccion(estado) {
-    if (!estado.ItemUsed) {
-        switch (estado.escenario) {
+export function usarAccion(personaje) {
+    if (!personaje.ItemUsed) {
+        switch (personaje.escenario) {
             case "Corridor-Fountain (panic)":
-                estado.vida = Math.min(estado.vida + 25, estado.MAX_VIDA); // valor minimo entre vida y MAX_VIDA, recordar...
-                actualizarDOM(
-                    estado.subsuelo,
-                    estado.vida,
-                    estado.stress,
-                    estado.escudo,
-                    estado.botas,
-                    estado.torch
-                );
-                console.log(
-                    "Has bebido en la fuente y recuperado vida. Vida actual:",
-                    estado.vida
-                );
-                break;
-
             case "Corridor-Fountain (w/ torch)":
-                estado.vida = Math.min(estado.vida + 25, estado.MAX_VIDA); // valor minimo entre vida y MAX_VIDA, recordar...
-                actualizarDOM(
-                    estado.subsuelo,
-                    estado.vida,
-                    estado.stress,
-                    estado.escudo,
-                    estado.botas,
-                    estado.torch
-                );
-                console.log(
-                    "Has bebido en la fuente y recuperado vida. Vida actual:",
-                    estado.vida
-                );
-                break;
-
             case "Corridor-Fountain":
-                estado.vida = Math.min(estado.vida + 25, estado.MAX_VIDA); // valor minimo entre vida y MAX_VIDA, recordar...
-                actualizarDOM(
-                    estado.subsuelo,
-                    estado.vida,
-                    estado.stress,
-                    estado.escudo,
-                    estado.botas,
-                    estado.torch
+                personaje.vida = Math.min(
+                    personaje.vida + 25,
+                    personaje.MAX_VIDA
                 );
+                personaje.actualizarDOM(); // Llamar al método actualizarDOM de la clase Personaje
                 console.log(
                     "Has bebido en la fuente y recuperado vida. Vida actual:",
-                    estado.vida
+                    personaje.vida
                 );
                 break;
 
             case "Corridor-Chest":
                 // Llamar a abrirCofre y actualizar los valores del personaje
-                const resultadosCofre = abrirCofre(
-                    estado.subsuelo,
-                    estado.vida,
-                    estado.stress,
-                    estado.escudo,
-                    estado.botas,
-                    estado.torch,
-                    estado.MAX_TORCH
-                );
-
-                // Actualizar las variables con los valores retornados
-                estado.vida = resultadosCofre.vida;
-                estado.escudo = resultadosCofre.escudo;
-                estado.botas = resultadosCofre.botas;
-                estado.torch = resultadosCofre.torch;
-
-                // El DOM ya se actualiza dentro de abrirCofre
+                abrirCofre(personaje);
+                // No es necesario actualizar DOM manualmente, ya se hace en abrirCofre
                 break;
 
             case "Corridor-Stairs":
-                estado.subsuelo += 1;
-                actualizarDOM(
-                    estado.subsuelo,
-                    estado.vida,
-                    estado.stress,
-                    estado.escudo,
-                    estado.botas,
-                    estado.torch
-                );
-                //"{ target: { matches: () => true } }" hace que el evento se active.
+                personaje.subsuelo += 1;
+                personaje.actualizarDOM(); // Llamar al método actualizarDOM de la clase Personaje
                 manejarClicBoton(
                     {
                         target: {
                             matches: (selector) => {
-                                // Devuelve true solo si el botón NO es explorar ni reiniciar
                                 return (
                                     selector !== "#boton-explorar" &&
                                     selector !== "#btn-restart"
@@ -139,11 +85,11 @@ export function usarAccion(estado) {
                             },
                         },
                     },
-                    estado
+                    personaje
                 );
                 console.log(
                     "Has subido al siguiente piso. Piso actual:",
-                    estado.subsuelo
+                    personaje.subsuelo
                 );
                 break;
 
@@ -152,7 +98,7 @@ export function usarAccion(estado) {
                 break;
         }
 
-        estado.ItemUsed = true;
+        personaje.ItemUsed = true;
     } else {
         console.log("Ya has usado el objeto en este escenario.");
     }

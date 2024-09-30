@@ -1,10 +1,16 @@
 {
-    "subsuelo": 0,
     "escenario": "StartingRoom",
     "evento": "Neutro",
     "vida": 100,
     "stress": 100,
     "escudo": false,
     "botas": false,
-    "torch": 10
+    "torch": 10,
+    "lastEvent": "Neutro",
+    "lastScenario": "StartingRoom",
+    "lastFountainFloor": -1,
+    "ItemUsed": false,
+    "MAX_VIDA": 100,
+    "MAX_STRESS": 100,
+    "MAX_TORCH": 10
 }
