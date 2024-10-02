@@ -59,10 +59,15 @@ export const imagenes = [
 export const escenarioImages = {};
 
 // Función para precargar las imágenes
-export function precargarImagenes() {
-    imagenes.forEach((imagen) => {
-        const img = new Image();
-        img.src = imagen.src;
-        escenarioImages[imagen.id] = img;
+// Precarga imágenes después de que la página se cargue completamente
+export function precargarImagenesEnSegundoPlano() {
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            imagenes.forEach((imagen) => {
+                const img = new Image();
+                img.src = imagen.src;
+                escenarioImages[imagen.id] = img; // Guarda la imagen una vez cargada
+            });
+        }, 1000); // Retraso de 1 segundo tras la carga de la página
     });
 }

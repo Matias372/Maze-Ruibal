@@ -1,6 +1,6 @@
 import { Personaje } from "./Character.js";
 import { manejarClicBoton, usarObjeto } from "./UserInputHandler.js";
-import { precargarImagenes } from "./ImageLoader.js";
+import { precargarImagenesEnSegundoPlano } from "./ImageLoader.js";
 
 // =========================
 // 1. variables globales
@@ -10,7 +10,7 @@ const estadoPersonaje = new Personaje();
 // =========================
 // 2. Funciones de inicialización
 // =========================
-precargarImagenes();
+precargarImagenesEnSegundoPlano();
 // Inicialización y variables globales...
 estadoPersonaje.cargarDatos();
 estadoPersonaje.actualizarDOM();

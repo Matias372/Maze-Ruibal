@@ -50,7 +50,6 @@ function mostrarEfectoDeDaño(sceneBackground, DamageEffects) {
 import { escenarioImages } from "./ImageLoader.js";
 
 // Función auxiliar para actualizar la interfaz
-// Función auxiliar para actualizar la interfaz
 export function actualizarFiltros(torch, stress) {
     const sceneFilter = document.querySelector(".scene__filter");
     const darkFilterImage = escenarioImages["filter-dark"].src;
