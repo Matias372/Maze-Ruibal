@@ -1,8 +1,21 @@
-1) EXPLICACION DE PROYECTO
-2) ELEMENTOS Y COMANDOS Utilizados
+1) SQL 
+2) EXPLICACION DE PROYECTO
+3) ELEMENTOS Y COMANDOS Utilizados
 
 ==========================================
-1) Explicacion de proyecto
+1) SQL
+==========================================
+
+En Assets/EXTRA se encuentra el SQL con la tabla de base de datos.
+modificar db_connection.php si se necesita. 
+datos actuales:
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
+define('DB_DATABASE', 'maze_db');
+
+==========================================
+2) Explicacion de proyecto
 ==========================================
 
 Hola, sabiendo que el curso era de Javascript, supuse que ibamos a concentrarnos en eso principalmente,
@@ -29,7 +42,7 @@ mis limitaciones, si quisiera sacar algo en linea que tan capas seria?
 
 
 ==========================================
-2)  Elementos y Comandos Utilizados:
+3)  Elementos y Comandos Utilizados:
 ==========================================
 
 confirmación==============
