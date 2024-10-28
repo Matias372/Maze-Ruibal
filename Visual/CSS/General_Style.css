@@ -424,7 +424,7 @@
 }
 .game-main .game-main__scene .scene__filter {
   background-size: contain;
-  background-image: url("../../Assets/Background/filter-light-wp.webp");
+  background-image: url("../../Assets/Background/filter-light-Wp.webp");
   z-index: 2;
   opacity: 0.6;
 }
